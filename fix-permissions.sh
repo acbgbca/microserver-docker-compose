@@ -1,14 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
-if [$1 == "-h"]; then
+set -e
+
+if [ "$1" == "-h" ]; then
   echo "Usage: fix-permissions.sh [user] [group] [working directory]";
   echo "Either all values need to be provided, or none (values will default if not provided)";
   exit 0;
 fi
 
-USER = ${1:ctrdata};
-GROUP = ${2:ctrdata};
-WORKDIR = ${3:$PWD};
+USER=${1:-ctrdata};
+GROUP=${2:-ctrdata};
+WORKDIR=${3:-$PWD};
 
 # First, ensure everything is owned by the provided user and group
 chown -R $USER.$GROUP $WORKDIR;
