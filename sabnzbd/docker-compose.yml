@@ -1,0 +1,30 @@
+---
+version: "3.7"
+services:
+  sabnzbd:
+    image: 'linuxserver/sabnzbd'
+    container_name: sabnzbd
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ="Australia/Melbourne"
+    volumes:
+        - '/ctr_cfg/sabnzbd/config:/config'
+        - 'nfs_downloads:/media'
+    ports:
+        - '8080:8080'
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/sabnzbd"]
+      interval: 5m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+volumes:
+  nfs_downloads:
+    external: true
+    name: nfs_downloads
+networks:
+  default:
+    external: true
+    name: ctr-network

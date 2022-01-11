@@ -1,0 +1,34 @@
+---
+version: "3.7"
+services:
+  radarr:
+    image: 'linuxserver/radarr'
+    container_name: radarr
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ="Australia/Melbourne"
+    volumes:
+      - '/ctr_cfg/radarr/config:/config'
+      - 'nfs_media:/movies'
+      - 'nfs_downloads:/media'
+    ports:
+      - 7878:7878
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878/radarr"]
+      interval: 5m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+volumes:
+  nfs_downloads:
+    external: true
+    name: nfs_downloads
+  nfs_media:
+    external: true
+    name: nfs_media
+networks:
+  default:
+    external: true
+    name: ctr-network

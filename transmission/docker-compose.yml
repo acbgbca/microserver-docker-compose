@@ -1,0 +1,36 @@
+---
+version: "3.7"
+services:
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ="Australia/Melbourne"
+    volumes:
+      - '/ctr_cfg/transmission/config:/config'
+      - 'nfs_downloads:/downloads'
+      - 'nfs_watch:/watch'
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/transmission/web/"]
+      interval: 5m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+volumes:
+  nfs_downloads:
+    external: true
+    name: nfs_downloads
+  nfs_watch:
+    external: true
+    name: nfs_watch
+networks:
+  default:
+    external: true
+    name: ctr-network
