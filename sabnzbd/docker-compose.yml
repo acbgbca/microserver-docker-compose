@@ -10,7 +10,7 @@ services:
       - TZ="Australia/Melbourne"
     volumes:
         - '/ctr_cfg/sabnzbd/config:/config'
-        - 'nfs_downloads:/media'
+        - '/mnt/downloads:/media'
     ports:
         - '8080:8080'
     restart: 'unless-stopped'
@@ -20,10 +20,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-volumes:
-  nfs_downloads:
-    external: true
-    name: nfs_downloads
 networks:
   default:
     external: true

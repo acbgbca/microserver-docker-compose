@@ -10,8 +10,8 @@ services:
       - TZ="Australia/Melbourne"
     volumes:
       - '/ctr_cfg/sonarr/config:/config'
-      - 'nfs_media:/tv'
-      - 'nfs_downloads:/media'
+      - '/mnt/downloads:/tv'
+      - '/mnt/videos:/media'
     ports:
       - 8989:8989
     restart: 'unless-stopped'
@@ -21,13 +21,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 1m
-volumes:
-  nfs_downloads:
-    external: true
-    name: nfs_downloads
-  nfs_media:
-    external: true
-    name: nfs_media
 networks:
   default:
     external: true

@@ -10,8 +10,7 @@ services:
       - TZ="Australia/Melbourne"
     volumes:
       - '/ctr_cfg/transmission/config:/config'
-      - 'nfs_downloads:/downloads'
-      - 'nfs_watch:/watch'
+      - '/mnt/downloads:/downloads'
     ports:
       - 9091:9091
       - 51413:51413
@@ -23,13 +22,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 1m
-volumes:
-  nfs_downloads:
-    external: true
-    name: nfs_downloads
-  nfs_watch:
-    external: true
-    name: nfs_watch
 networks:
   default:
     external: true

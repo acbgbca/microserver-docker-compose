@@ -24,22 +24,6 @@ A docker network needs to be configured to ensure that all containers can see ea
 docker network create -d bridge ctr-network
 ```
 
-### Network Volumes
-Before the containers can be created, the docker volumes need to be created. The following need to be created as NFS volumes:
-* nfs_downloads
-* nfs_media
-* nfs_watch
-
-The command for creating an NFS volume is:
-
-```
-docker volume create --driver local \
-  --opt type=nfs \
-  --opt o=nfsvers=4,addr=<address>,rw \
-  --opt device=:<shared directory> \
-  <volume name>
-```
-
 ### Config Volumes
 All of the configuration is stored on a local mount volume. This is because backing up and restoring mounted volumes is much easier than docker managed volumes.
 
