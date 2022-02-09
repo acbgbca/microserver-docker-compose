@@ -1,0 +1,28 @@
+---
+version: "3.7"
+services:
+  ipsecvpn:
+    image: 'hwdsl2/ipsec-vpn-server'
+    container_name: ipsecvpn
+    env_file: vpn.env
+    volumes:
+      - '/ctr_cfg/ipsecvpn/config:/etc/ipsec.d'
+      - '/lib/modules:/lib/modules:ro'
+    ports:
+      - 500:500/udp
+      - 4500:4500/udp
+    restart: 'unless-stopped'
+    cap_add:
+    - NET_ADMIN
+    devices:
+      - "/dev/ppp:/dev/ppp"
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.accept_redirects=0
+      - net.ipv4.conf.all.send_redirects=0
+      - net.ipv4.conf.all.rp_filter=0
+      - net.ipv4.conf.default.accept_redirects=0
+      - net.ipv4.conf.default.send_redirects=0
+      - net.ipv4.conf.default.rp_filter=0
+      - net.ipv4.conf.eth0.send_redirects=0
+      - net.ipv4.conf.eth0.rp_filter=0
