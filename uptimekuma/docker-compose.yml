@@ -1,0 +1,21 @@
+---
+version: "3.7"
+services:
+  uptimekuma:
+    image: 'louislam/uptime-kuma'
+    container_name: uptimekuma
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ="Australia/Melbourne"
+    volumes:
+      - '/ctr_cfg/uptimekuma/config:/app/data'
+      - '/mnt/downloads:/tv'
+      - '/mnt/videos:/media'
+    ports:
+      - 3001:3001
+    restart: 'unless-stopped'
+networks:
+  default:
+    external: true
+    name: ctr-network

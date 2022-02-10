@@ -26,3 +26,7 @@ services:
       - net.ipv4.conf.default.rp_filter=0
       - net.ipv4.conf.eth0.send_redirects=0
       - net.ipv4.conf.eth0.rp_filter=0
+networks:
+  default:
+    external: true
+    name: ctr-network
