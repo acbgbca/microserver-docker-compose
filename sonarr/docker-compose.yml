@@ -5,7 +5,7 @@ services:
     image: 'linuxserver/sonarr'
     container_name: sonarr
     labels:
-      - traefik.http.routers.sonarr.rule=Path(`/sonarr`)
+      - traefik.http.routers.sonarr.rule=PathPrefix(`/sonarr`)
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
     environment:
       - PUID=9001
