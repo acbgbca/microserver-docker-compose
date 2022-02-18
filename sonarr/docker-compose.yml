@@ -10,8 +10,8 @@ services:
       - TZ="Australia/Melbourne"
     volumes:
       - '/ctr_cfg/sonarr/config:/config'
-      - '/mnt/downloads:/tv'
-      - '/mnt/videos:/media'
+      - '/mnt/videos:/tv'
+      - '/mnt/downloads:/media'
     ports:
       - 8989:8989
     restart: 'unless-stopped'
