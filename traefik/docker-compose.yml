@@ -3,7 +3,7 @@ version: "3.7"
 
 services:
   traefik:
-    image: traefik/traefik:latest
+    image: traefik:latest
     container_name: traefik
     restart: unless-stopped
     security_opt:
