@@ -4,6 +4,9 @@ services:
   sabnzbd:
     image: 'linuxserver/sabnzbd'
     container_name: sabnzbd
+    labels:
+      - traefik.http.routers.sabnzbd.rule=Path(`/sabnzbd`)
+      - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
     environment:
       - PUID=9001
       - PGID=9001
@@ -11,8 +14,6 @@ services:
     volumes:
         - '/ctr_cfg/sabnzbd/config:/config'
         - '/mnt/downloads:/media'
-    ports:
-        - '8080:8080'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/sabnzbd"]
