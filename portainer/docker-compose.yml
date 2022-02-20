@@ -6,6 +6,7 @@ services:
     image: portainer/portainer-ce:latest
     container_name: portainer
     labels:
+      - traefik.enable=true
       - traefik.http.routers.radarr.rule=Host(`portainer.local`)
       - traefik.http.services.radarr.loadbalancer.server.port=9000
     restart: unless-stopped

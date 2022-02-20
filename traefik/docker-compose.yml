@@ -6,6 +6,7 @@ services:
     image: traefik:latest
     container_name: traefik
     labels:
+      - traefik.enable=true
       - traefik.http.routers.radarr.rule=Host(`traefik.local`)
       - traefik.http.services.radarr.loadbalancer.server.port=8080
     command:
