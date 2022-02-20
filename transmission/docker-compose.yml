@@ -5,7 +5,7 @@ services:
     image: linuxserver/transmission
     container_name: transmission
     labels:
-      - traefik.http.routers.transmission.rule=PathPrefix(`/transmission`)
+      - traefik.http.routers.transmission.rule=Host(`transmission.local`)
       - traefik.http.services.transmission.loadbalancer.server.port=9091
     environment:
       - PUID=9001
