@@ -1,0 +1,21 @@
+---
+version: "3.7"
+services:
+  heimdall:
+    image: 'linuxserver/heimdall:latest'
+    container_name: heimdall
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.heimdall.rule=Host(`heimdall.local`)
+      - traefik.http.services.heimdall.loadbalancer.server.port=80
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ="Australia/Melbourne"
+    volumes:
+      - './config:/config'
+    restart: 'unless-stopped'
+networks:
+  default:
+    external: true
+    name: ctr-network
