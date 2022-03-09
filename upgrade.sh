@@ -17,5 +17,5 @@ for d in */ ; do
 done
 
 # Remove old images
-docker image prune
+docker image prune -f
 
