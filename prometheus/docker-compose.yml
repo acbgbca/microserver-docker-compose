@@ -15,8 +15,10 @@ services:
     restart: unless-stopped
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
+    security_opt:
+      - no-new-privileges:true
     depends_on:
-    - cadvisor
+      - cadvisor
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor
@@ -32,6 +34,11 @@ services:
       - /dev/disk/:/dev/disk:ro
     devices:
       - /dev/kmsg
+    command:
+      - '-housekeeping_interval=10s'
+      - '-docker_only=true'
+    security_opt:
+      - no-new-privileges:true
     restart: unless-stopped
   node_exporter:
     image: quay.io/prometheus/node-exporter:latest
@@ -39,6 +46,8 @@ services:
     command:
       - '--path.rootfs=/host'
     pid: host
+    security_opt:
+      - no-new-privileges:true
     restart: unless-stopped
     volumes:
       - '/:/host:ro,rslave'
