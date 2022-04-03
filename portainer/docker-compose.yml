@@ -18,6 +18,11 @@ services:
       - ./data:/data
     ports:
       - 9000:9000
+    logging:
+      driver: loki
+      options:
+        mode: non-blocking
+        loki-url: "http://localhost:3100/loki/api/v1/push"
 networks:
   default:
     external: true

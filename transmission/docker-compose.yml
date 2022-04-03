@@ -22,10 +22,15 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9091/transmission/web/"]
-      interval: 5m
+      interval: 1m
       timeout: 10s
       retries: 3
       start_period: 1m
+    logging:
+      driver: loki
+      options:
+        mode: non-blocking
+        loki-url: "http://localhost:3100/loki/api/v1/push"
 networks:
   default:
     external: true
