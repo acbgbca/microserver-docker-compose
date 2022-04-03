@@ -27,6 +27,14 @@ services:
       options:
         mode: non-blocking
         loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-pipeline-stages: |
+          - multiline:
+              firstline: '^\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}:\d{2},\d{3}\:\:'
+              max_wait_time: 3s
+          - regex:
+              expression: '^(?P<time>\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}:\d{2},\d{3})\:\:(?P<level>\d{4,5})\:\:(?P<message>(?s:.*))$'
+          - labels:
+              level:
 networks:
   default:
     external: true

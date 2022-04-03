@@ -15,11 +15,6 @@ services:
     volumes:
       - './config:/config'
     restart: 'unless-stopped'
-    logging:
-      driver: loki
-      options:
-        mode: non-blocking
-        loki-url: "http://localhost:3100/loki/api/v1/push"
 networks:
   default:
     external: true

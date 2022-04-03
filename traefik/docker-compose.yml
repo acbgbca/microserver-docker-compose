@@ -28,6 +28,17 @@ services:
       options:
         mode: non-blocking
         loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-pipeline-stages: |
+          - multiline:
+              firstline: '^time='
+              max_wait_time: 3s
+          - regex:
+              expression: '^time=\"(?P<time>\d{4}-\d{2}-\d{2}T\d{1,2}:\d{2}:\d{2}\+\d{1,2}:\d{2})\" level=(?P<level>\w{4,5}) msg=\"(?P<message>(?s:.*))\"$'
+          - replace:
+              expression: 'level=(?P<level>\w{4,5})'
+              replace: '{{ .Value | ToUpper}}'
+          - labels:
+              level:
 networks:
   default:
     external: true
