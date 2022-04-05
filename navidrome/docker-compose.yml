@@ -15,6 +15,17 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
+    loki-pipeline-stages: |
+        - multiline:
+            firstline: '^time='
+            max_wait_time: 3s
+        - regex:
+            expression: 'level=(?P<level>\w{4,5})'
+        - replace:
+            expression: 'level=(?P<level>\w{4,5})'
+            replace: '{{ .Value | ToUpper}}'
+        - labels:
+            level:
 networks:
   default:
     external: true
