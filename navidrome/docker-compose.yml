@@ -5,6 +5,7 @@ services:
     image: deluan/navidrome:latest
     container_name: navidrome
     user: 9001:9001
+    env_file: navidrome.env
     labels:
       - traefik.enable=true
       - traefik.http.routers.navidrome.rule=Host(`navidrome.local`)
