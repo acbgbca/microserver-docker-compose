@@ -1,0 +1,21 @@
+---
+version: "3.7"
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    user: 9001:9001
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.navidrome.rule=Host(`navidrome.local`)
+      - traefik.http.services.navidrome.loadbalancer.server.port=4533
+    volumes:
+      - "./data:/data"
+      - "/mnt/music:/music:ro"
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: ctr-network
