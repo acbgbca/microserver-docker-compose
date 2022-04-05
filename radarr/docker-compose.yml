@@ -35,7 +35,7 @@ services:
               firstline: '^\['
               max_wait_time: 3s
           - regex:
-              expression: '^\[(?P<level>\w+)\] (?P<message>(?s:.*))$'
+              expression: '^\[(?P<level>\w+)\]'
           - replace:
               expression: '^\[(?P<level>\w+)\]'
               replace: '{{ .Value | ToUpper}}'
