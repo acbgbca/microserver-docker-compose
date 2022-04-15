@@ -4,7 +4,6 @@ services:
   gitlab:
     image: 'gitlab/gitlab-ee:latest'
     container_name: gitlab
-    user: 9001:9001
     labels:
       - traefik.enable=true
       - traefik.http.routers.gitlab.rule=Host(`gitlab.local`)
@@ -22,7 +21,6 @@ services:
   gitlab-runner:
     image: 'gitlab/gitlab-runner:latest'
     container_name: 'gitlab-runner'
-    user: 9001:9001
     volumes:
       - "./runner-config:/etc/gitlab-runner"
       - "/var/run/docker.sock:/var/run/docker.sock"
