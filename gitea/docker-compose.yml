@@ -1,0 +1,27 @@
+---
+version: "3.7"
+services:
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    user: 9001:9001
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gitea.rule=Host(`gitea.local`)
+      - traefik.http.services.gitea.loadbalancer.server.port=3000
+    environment:
+      - USER_UID=9001
+      - USER_GID=9001
+    volumes:
+      - ./data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    security_opt:
+      - no-new-privileges:true
+    restart: 'unless-stopped'
+    ports:
+      - "222:22"
+networks:
+  default:
+    external: true
+    name: ctr-network
