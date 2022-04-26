@@ -8,7 +8,12 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.nexus.rule=Host(`nexus.local`)
-      - traefik.http.services.nexus.loadbalancer.server.port=8081
+      - traefik.http.routers.nexus.service=svc_nexus
+      - traefik.http.services.svc_nexus.loadbalancer.server.port=8081
+
+      - traefik.http.routers.nexus_docker.rule=Host(`nexus_docker.local`)
+      - traefik.http.routers.nexus_docker.service=svc_nexus_docker
+      - traefik.http.services.svc_nexus_docker.loadbalancer.server.port=5000
     environment:
       - USER_UID=9001
       - USER_GID=9001

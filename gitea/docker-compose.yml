@@ -4,7 +4,6 @@ services:
   gitea:
     image: gitea/gitea:latest
     container_name: gitea
-    user: 9001:9001
     labels:
       - traefik.enable=true
       - traefik.http.routers.gitea.rule=Host(`gitea.local`)
