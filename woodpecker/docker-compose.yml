@@ -14,11 +14,6 @@ services:
       - ./data:/var/lib/woodpecker
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    environment:
-      - USER_UID=9001
-      - USER_GID=9001
-      - WOODPECKER_OPEN=true
-      - WOODPECKER_HOST=http://woodpecker.local
     security_opt:
       - no-new-privileges:true
     restart: 'unless-stopped'
@@ -30,8 +25,6 @@ services:
     command: agent
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - WOODPECKER_SERVER=woodpecker:9000
     restart: 'unless-stopped'
     depends_on:
       - woodpecker-server
