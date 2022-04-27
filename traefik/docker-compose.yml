@@ -15,6 +15,9 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--providers.file.directory=/config"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=secure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.secure.address=:443"
       - "--entrypoints.secure.http.tls=true"
     restart: unless-stopped
