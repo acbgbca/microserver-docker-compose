@@ -19,6 +19,7 @@ services:
       - USER_GID=9001
     volumes:
       - ./data:/nexus-data
+      - /ctr_data/nexus/blobs:/blobs
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     security_opt:

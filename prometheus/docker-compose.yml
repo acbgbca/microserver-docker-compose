@@ -35,8 +35,9 @@ services:
     devices:
       - /dev/kmsg
     command:
-      - '-housekeeping_interval=10s'
-      - '-docker_only=true'
+      - '--housekeeping_interval=30s'
+      - '--docker_only=true'
+      - '--disable_metrics=percpu,sched,tcp,udp,disk'
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
