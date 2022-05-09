@@ -6,7 +6,6 @@ services:
     container_name: gitea
     labels:
       - traefik.enable=true
-      - traefik.http.routers.gitea.rule=Host(`gitea.local`)
       - traefik.http.services.gitea.loadbalancer.server.port=3000
     environment:
       - USER_UID=9001

@@ -7,7 +7,6 @@ services:
     container_name: portainer
     labels:
       - traefik.enable=true
-      - traefik.http.routers.portainer.rule=Host(`portainer.local`)
       - traefik.http.services.portainer.loadbalancer.server.port=9000
     restart: unless-stopped
     security_opt:

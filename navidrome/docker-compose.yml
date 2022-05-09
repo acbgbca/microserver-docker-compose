@@ -8,7 +8,6 @@ services:
     env_file: navidrome.env
     labels:
       - traefik.enable=true
-      - traefik.http.routers.navidrome.rule=Host(`navidrome.local`)
       - traefik.http.services.navidrome.loadbalancer.server.port=4533
     volumes:
       - "./data:/data"

@@ -7,7 +7,6 @@ services:
     user: "9001:9001"
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.local`)
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
     volumes:
       - ./etc:/etc/prometheus
@@ -22,10 +21,6 @@ services:
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.cadvisor.rule=Host(`cadvisor.local`)
-      - traefik.http.services.cadvisor.loadbalancer.server.port=8080
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw

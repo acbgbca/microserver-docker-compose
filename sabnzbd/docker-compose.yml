@@ -6,7 +6,6 @@ services:
     container_name: sabnzbd
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.local`)
       - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
     environment:
       - PUID=9001

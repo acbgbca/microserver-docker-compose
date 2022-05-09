@@ -6,7 +6,6 @@ services:
     container_name: uptimekuma
     labels:
       - traefik.enable=true
-      - traefik.http.routers.uptimekuma.rule=Host(`uptime.local`)
       - traefik.http.services.uptimekuma.loadbalancer.server.port=3001
     environment:
       - PUID=9001

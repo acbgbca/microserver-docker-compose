@@ -7,7 +7,6 @@ services:
     user: "9001:9001"
     labels:
       - traefik.enable=true
-      - traefik.http.routers.grafana.rule=Host(`grafana.local`)
       - traefik.http.services.grafana.loadbalancer.server.port=3000
     volumes:
       - ./data:/var/lib/grafana

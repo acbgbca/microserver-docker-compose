@@ -6,7 +6,6 @@ services:
     container_name: sonarr
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sonarr.rule=Host(`sonarr.local`)
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
     environment:
       - PUID=9001
