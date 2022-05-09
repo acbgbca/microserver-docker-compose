@@ -7,7 +7,7 @@ bd=${2:-/tmp}
 bd=$bd/`date "+%Y%m%d"`
 
 # Create a directory for today
-mkdir $bd
+mkdir -p $bd
 
 echo "Working Directory: $wd"
 echo "Backup Directory: $bd"
@@ -25,7 +25,7 @@ for d in */ ; do
 	if [ $d = "plex" ]
 	then
 		# Exclude paths not required for rsetore
-		tar --exclude='config/Library/Application Support/Plex Media Server/Cache' --exclude='/config/Library/Application Support/Plex Media Server/Crash Reports' --exclude='config/Library/Application Support/Plex Media Server/Logs' --exclude='config/Library/Application Support/Plex Media Server/Media' -czf $bd/$d.tgz $d
+		tar --exclude='config/Library/Application Support/Plex Media Server/Cache' --exclude='config/Library/Application Support/Plex Media Server/Crash Reports' --exclude='config/Library/Application Support/Plex Media Server/Logs' --exclude='config/Library/Application Support/Plex Media Server/Media' -czf $bd/$d.tgz $d
 	else
 		tar -czf $bd/$d.tgz $d
 	fi
