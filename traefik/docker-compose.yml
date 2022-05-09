@@ -12,7 +12,7 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$domain`)'
+      - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$domain`,`{{ index .Labels "com.docker.compose.service" }}.local`)'
       - "--providers.file.directory=/config"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=secure"
