@@ -1,0 +1,16 @@
+---
+version: "3.7"
+services:
+  azureagent:
+    image: dockeragent:latest
+    container_name: azureagent
+    env_file: azure.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    security_opt:
+      - no-new-privileges:true
+    restart: 'unless-stopped'
+networks:
+  default:
+    external: true
+    name: ctr-network

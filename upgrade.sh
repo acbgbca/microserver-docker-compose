@@ -9,7 +9,7 @@ for d in */ ; do
 	echo "Upgrading $d"
 	cd $d
 	# Download updated containers
-	docker-compose pull
+	docker-compose pull --ignore-pull-failures
 
 	# Upgrade container if required
 	docker-compose up -d --remove-orphans

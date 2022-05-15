@@ -1,0 +1,15 @@
+---
+version: "3.7"
+services:
+  minecraft:
+    image: acbca/minecraft-bedrock:alpha
+    container_name: minecraft
+    user: "9001:9001"
+    volumes:
+      - ./config:/config
+      - ./worlds:/worlds
+    security_opt:
+      - no-new-privileges:true
+    restart: 'unless-stopped'
+    ports:
+      - 19132:19132/udp
