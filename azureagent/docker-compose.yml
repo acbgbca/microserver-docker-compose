@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   azureagent:
-    image: dockeragent:latest
+    build: ./image_src
     container_name: azureagent
     env_file: azure.env
     volumes:
