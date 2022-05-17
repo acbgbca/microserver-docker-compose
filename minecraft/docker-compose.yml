@@ -2,9 +2,12 @@
 version: "3.7"
 services:
   minecraft:
-    image: acbca/minecraft-bedrock:alpha
+    image: acbca/minecraft-bedrock:latest
     container_name: minecraft
-    user: "9001:9001"
+    environment:
+      - UID=9001
+      - GID=9001
+      - EULA=TRUE
     volumes:
       - ./config:/config
       - ./worlds:/worlds
