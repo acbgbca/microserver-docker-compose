@@ -15,8 +15,6 @@ services:
       - '/ctr_cfg/sonarr/config:/config'
       - '/mnt/videos:/tv'
       - '/mnt/downloads:/media'
-    ports:
-      - 8989:8989
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8989/sonarr"]

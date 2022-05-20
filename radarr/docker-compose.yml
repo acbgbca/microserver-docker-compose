@@ -15,8 +15,6 @@ services:
       - '/ctr_cfg/radarr/config:/config'
       - '/mnt/videos:/movies'
       - '/mnt/downloads:/media'
-    ports:
-      - 7878:7878
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7878/radarr"]
