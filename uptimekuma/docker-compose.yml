@@ -15,8 +15,6 @@ services:
       - '/ctr_cfg/uptimekuma/config:/app/data'
       - '/mnt/downloads:/tv'
       - '/mnt/videos:/media'
-    ports:
-      - 3001:3001
     restart: 'unless-stopped'
 networks:
   default:
