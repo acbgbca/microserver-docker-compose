@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM ubuntu:18.04
 
 # To make it easier for build and release pipelines to run apt-get,
@@ -5,7 +6,8 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN --mount=type=cache,target=/var/cache/apt \
+  apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     jq \
@@ -18,10 +20,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl1.0 \
   && rm -rf /var/lib/apt/lists/*
 
-RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
+RUN --mount=type=cache,target=/var/cache/apt \
+  curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
   && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL https://get.docker.com | sh
+RUN --mount=type=cache,target=/var/cache/apt \
+  curl -fsSL https://get.docker.com | sh \
+  && rm -rf /var/lib/apt/lists/*
 
 # Can be 'linux-x64', 'linux-arm64', 'linux-arm', 'rhel.6-x64'.
 ENV TARGETARCH=linux-x64
