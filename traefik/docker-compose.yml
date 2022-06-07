@@ -25,6 +25,7 @@ services:
       - "--entrypoints.secure.address=:443"
       - "--entrypoints.secure.http.tls=true"
       - "--entrypoints.secure.http.tls.certResolver=cf"
+      - "--entrypoints.secure.http.middlewares=authelia@docker"
     environment:
       - "CF_ZONE_API_TOKEN=$API_TOKEN"
       - "CF_DNS_API_TOKEN=$API_TOKEN"
@@ -41,6 +42,42 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
+    depends_on:
+      - authelia
+    logging:
+      driver: loki
+      options:
+        mode: non-blocking
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-pipeline-stages: |
+          - multiline:
+              firstline: '^time='
+              max_wait_time: 3s
+          - regex:
+              expression: 'level=(?P<level>\w{4,5})'
+          - replace:
+              expression: 'level=(?P<level>\w{4,5})'
+              replace: '{{ .Value | ToUpper}}'
+          - labels:
+              level:
+  authelia:
+    image: authelia/authelia:latest
+    container_name: authelia
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.authelia.loadbalancer.server.port=9091
+      - traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://authelia.$domain/
+      - traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true
+      - traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
+      - traefik.http.middlewares.authelia-basic.forwardauth.address=http://authelia:9091/api/verify?auth=basic
+      - traefik.http.middlewares.authelia-basic.forwardauth.trustForwardHeader=true
+      - traefik.http.middlewares.authelia-basic.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./authelia:/config
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     logging:
       driver: loki
       options:
