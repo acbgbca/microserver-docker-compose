@@ -1,9 +1,9 @@
 ---
 version: "3.7"
 services:
-  minecraft:
-    image: acbca/minecraft-bedrock:1.18.33.02
-    container_name: minecraft
+  minecraft-alpha:
+    image: minecraft-bedrock:alpha
+    container_name: minecraft-alpha
     environment:
       - UID=9001
       - GID=9001
@@ -13,6 +13,5 @@ services:
       - ./worlds:/worlds
     security_opt:
       - no-new-privileges:true
-    restart: 'unless-stopped'
     ports:
-      - 19132:19132/udp
+      - 19135:19132/udp

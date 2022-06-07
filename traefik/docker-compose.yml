@@ -12,14 +12,22 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$domain`,`{{ index .Labels "com.docker.compose.service" }}.local`)'
+      - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$domain`)'
       - "--providers.file.directory=/config"
+      - "--certificatesresolvers.cf.acme.dnschallenge=true"
+      - "--certificatesresolvers.cf.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cf.acme.email=$email"
+      - "--certificatesresolvers.cf.acme.storage=/letsencrypt/acme.json"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=secure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.secure.address=:443"
       - "--entrypoints.secure.http.tls=true"
+      - "--entrypoints.secure.http.tls.certResolver=cf"
+    environment:
+      - "CF_ZONE_API_TOKEN=$API_TOKEN"
+      - "CF_DNS_API_TOKEN=$API_TOKEN"
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -28,6 +36,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./certs:/certs
       - ./config:/config
+      - ./letsencrypt:/letsencrypt
     ports:
       - 80:80
       - 443:443
