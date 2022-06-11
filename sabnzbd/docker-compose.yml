@@ -7,6 +7,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
+      - show.external=true
     environment:
       - PUID=9001
       - PGID=9001

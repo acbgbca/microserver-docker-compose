@@ -7,6 +7,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.uptimekuma.loadbalancer.server.port=3001
+      - show.external=true
     environment:
       - PUID=9001
       - PGID=9001

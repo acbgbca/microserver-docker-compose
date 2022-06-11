@@ -7,6 +7,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
+      - show.external=true
     environment:
       - PUID=9001
       - PGID=9001

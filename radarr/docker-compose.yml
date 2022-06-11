@@ -7,6 +7,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.radarr.loadbalancer.server.port=7878
+      - show.external=true
     environment:
       - PUID=9001
       - PGID=9001

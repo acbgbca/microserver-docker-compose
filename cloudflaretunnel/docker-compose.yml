@@ -1,19 +1,33 @@
 ---
 version: "3.7"
-
 services:
-  traefik:
+  cloudflared:
+    image: 'cloudflare/cloudflared:2022.5.3'
+    container_name: cloudflared
+    user: 9001:9001
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./config:/config
+    command:
+      - "tunnel"
+      - "--no-autoupdate"
+      - "--config"
+      - "/config/config.yml"
+      - "run"
+    restart: 'unless-stopped'
+  traefikexternal:
     image: traefik:latest
-    container_name: traefik
+    container_name: traefikexternal
     labels:
       - traefik.enable=true
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.services.traefikexternal.loadbalancer.server.port=8080
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$domain`)'
-      - "--providers.file.directory=/config"
+      - "--providers.docker.constraints=Label(`show.external`,`true`)"
+      - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$externaldomain`)'
       - "--certificatesresolvers.cf.acme.dnschallenge=true"
       - "--certificatesresolvers.cf.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.cf.acme.email=$email"
@@ -23,27 +37,25 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.secure.address=:443"
+      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.17.0.1/16"
       - "--entrypoints.secure.http.tls=true"
       - "--entrypoints.secure.http.tls.certResolver=cf"
-      - "--entrypoints.secure.http.middlewares=authelia@docker"
+      - "--entrypoints.secure.http.middlewares=autheliaexternal@docker"
     environment:
       - "CF_ZONE_API_TOKEN=$API_TOKEN"
       - "CF_DNS_API_TOKEN=$API_TOKEN"
+    ports:
+      - 81:80
+      - 444:443
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./certs:/certs
-      - ./config:/config
-      - ./letsencrypt:/letsencrypt
-    ports:
-      - 80:80
-      - 443:443
-      - 8080:8080
+      - ./ext_letsencrypt:/letsencrypt
     depends_on:
-      - authelia
+      - autheliaexternal
     logging:
       driver: loki
       options:
@@ -60,18 +72,19 @@ services:
               replace: '{{ .Value | ToUpper}}'
           - labels:
               level:
-  authelia:
+  autheliaexternal:
     image: authelia/authelia:latest
-    container_name: authelia
+    container_name: autheliaexternal
     labels:
       - traefik.enable=true
-      - traefik.http.services.authelia.loadbalancer.server.port=9091
-      - traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://authelia.$domain/
-      - traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true
-      - traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
+      - traefik.http.services.autheliaexternal.loadbalancer.server.port=9091
+      - traefik.http.middlewares.autheliaexternal.forwardauth.address=http://autheliaexternal:9091/api/verify?rd=https://autheliaexternal.$externaldomain/
+      - traefik.http.middlewares.autheliaexternal.forwardauth.trustForwardHeader=true
+      - traefik.http.middlewares.autheliaexternal.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
+      - show.external=true
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./authelia:/config
+      - ./ext_authelia:/config
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
