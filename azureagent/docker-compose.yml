@@ -10,6 +10,15 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: 'unless-stopped'
+    logging:
+      driver: loki
+      options:
+        mode: non-blocking
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-pipeline-stages: |
+          - multiline:
+              firstline: '^\d{4}-'
+              max_wait_time: 3s
 networks:
   default:
     external: true
