@@ -10,16 +10,25 @@ export DOCKER_BUILDKIT=1
 
 for d in */ ; do
 	echo "Upgrading $d"
+
 	cd $d
 
-	# Download updated containers
-	docker-compose pull --ignore-pull-failures
+	if [ -f ".no_upgrade" ]; then
 
-	# Rebuild any docker container defined in the docker-compose file
-	# docker-compose build --no-cache
+		echo "Skipping $d"
+		
+	else
 
-	# Upgrade container if required
-	docker-compose up -d --remove-orphans
+		# Download updated containers
+		docker-compose pull --ignore-pull-failures
+
+		# Rebuild any docker container defined in the docker-compose file
+		# docker-compose build --no-cache
+
+		# Upgrade container if required
+		docker-compose up -d --remove-orphans
+		
+	fi
 	cd ..
 done
 
