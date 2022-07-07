@@ -37,7 +37,7 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.secure.address=:443"
-      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.17.0.1/16"
+      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.18.0.1/16"
       - "--entrypoints.secure.http.tls=true"
       - "--entrypoints.secure.http.tls.certResolver=cf"
       - "--entrypoints.secure.http.middlewares=autheliaexternal@docker"

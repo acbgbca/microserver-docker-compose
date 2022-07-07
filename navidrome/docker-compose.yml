@@ -25,9 +25,9 @@ services:
               firstline: '^time='
               max_wait_time: 3s
           - regex:
-              expression: 'level=(?P<level>\w{4,5})'
+              expression: 'level=(?P<level>\w{4,7})'
           - replace:
-              expression: 'level=(?P<level>\w{4,5})'
+              expression: 'level=(?P<level>\w{4,7})'
               replace: '{{ .Value | ToUpper}}'
           - labels:
               level:
