@@ -16,6 +16,7 @@ services:
       - "/config/config.yml"
       - "run"
     restart: 'unless-stopped'
+
   traefikexternal:
     image: traefik:latest
     container_name: traefikexternal
@@ -37,16 +38,16 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.secure.address=:443"
-      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.18.0.1/16"
+      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.16.0.1/12"
       - "--entrypoints.secure.http.tls=true"
       - "--entrypoints.secure.http.tls.certResolver=cf"
       - "--entrypoints.secure.http.middlewares=autheliaexternal@docker"
     environment:
       - "CF_ZONE_API_TOKEN=$API_TOKEN"
       - "CF_DNS_API_TOKEN=$API_TOKEN"
-    ports:
-      - 81:80
-      - 444:443
+    networks:
+      - default
+      - ctrnetwork
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -72,6 +73,7 @@ services:
               replace: '{{ .Value | ToUpper}}'
           - labels:
               level:
+
   autheliaexternal:
     image: authelia/authelia:latest
     container_name: autheliaexternal
@@ -106,5 +108,6 @@ services:
               level:
 networks:
   default:
+  ctrnetwork:
     external: true
     name: ctr-network

@@ -9,7 +9,7 @@ services:
       - ./data:/data/loki
     user: "9001:9001"
     ports:
-      - 3100:3100
+      - 127.0.0.1:3100:3100
     command: -config.file=/etc/loki/config.yaml
     restart: unless-stopped
 networks:
