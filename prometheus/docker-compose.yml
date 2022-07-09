@@ -14,6 +14,7 @@ services:
     restart: unless-stopped
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=45d"
     security_opt:
       - no-new-privileges:true
     depends_on:
