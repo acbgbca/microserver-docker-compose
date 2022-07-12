@@ -8,7 +8,7 @@ services:
     volumes:
       - '/ctr_cfg/plex/config:/config'
       - '/tmp/transcode:/transcode'
-      - '/mnt/videos:/data'
+      - 'videos:/data'
     ports:
       - 32400:32400/tcp
       - 1900:1900/udp
@@ -30,3 +30,6 @@ networks:
   default:
     external: true
     name: ctr-network
+volumes:
+  videos:
+    external: true

@@ -14,8 +14,8 @@ services:
       - TZ="Australia/Melbourne"
     volumes:
       - '/ctr_cfg/sonarr/config:/config'
-      - '/mnt/videos:/tv'
-      - '/mnt/downloads:/media'
+      - 'videos:/tv'
+      - 'downloads:/media'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8989/sonarr"]
@@ -43,3 +43,8 @@ networks:
   default:
     external: true
     name: ctr-network
+volumes:
+  videos:
+    external: true
+  downloads:
+    external: true

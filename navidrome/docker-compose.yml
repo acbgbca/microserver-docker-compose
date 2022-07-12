@@ -11,7 +11,7 @@ services:
       - traefik.http.services.navidrome.loadbalancer.server.port=4533
     volumes:
       - "./data:/data"
-      - "/mnt/music:/music:ro"
+      - "music:/music:ro"
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
@@ -35,3 +35,6 @@ networks:
   default:
     external: true
     name: ctr-network
+volumes:
+  music:
+    external: true
