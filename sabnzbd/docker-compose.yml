@@ -14,7 +14,7 @@ services:
       - TZ="Australia/Melbourne"
     volumes:
         - '/ctr_cfg/sabnzbd/config:/config'
-        - 'downloads:/media'
+        - '/mnt/downloads:/media'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/sabnzbd"]
@@ -39,6 +39,3 @@ networks:
   default:
     external: true
     name: ctr-network
-volumes:
-  downloads:
-    external: true
