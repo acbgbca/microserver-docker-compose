@@ -1,5 +1,5 @@
 ---
-version: "3.7"
+version: "2.4"
 
 services:
   traefik:
@@ -71,12 +71,20 @@ services:
       - traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://authelia.$domain/
       - traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true
       - traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
+    environment:
+      - PUID=9001
+      - PGID=9001
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./authelia:/config
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
+    depends_on:
+      - redis
+    networks:
+      - internal
+      - default
     logging:
       driver: loki
       options:
@@ -93,7 +101,19 @@ services:
               replace: '{{ .Value | ToUpper}}'
           - labels:
               level:
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server --save 20 1 --loglevel warning --requirepass authelia
+    volumes: 
+      - ./redis:/data
+    networks:
+      - internal
 networks:
   default:
     external: true
     name: ctr-network
+  internal:
+    driver: bridge
+    internal: true
+    name: internal

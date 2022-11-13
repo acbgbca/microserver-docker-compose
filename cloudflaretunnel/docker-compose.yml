@@ -1,5 +1,5 @@
 ---
-version: "3.7"
+version: "2.4"
 services:
   cloudflared:
     image: 'cloudflare/cloudflared:2022.5.3'
@@ -84,12 +84,17 @@ services:
       - traefik.http.middlewares.autheliaexternal.forwardauth.trustForwardHeader=true
       - traefik.http.middlewares.autheliaexternal.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
       - show.external=true
+    environment:
+      - PUID=9001
+      - PGID=9001
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./ext_authelia:/config
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
+    depends_on:
+      - redis
     logging:
       driver: loki
       options:
@@ -106,6 +111,12 @@ services:
               replace: '{{ .Value | ToUpper}}'
           - labels:
               level:
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server --save 20 1 --loglevel warning --requirepass authelia
+    volumes: 
+      - ./redis:/data
 networks:
   default:
   ctrnetwork:
