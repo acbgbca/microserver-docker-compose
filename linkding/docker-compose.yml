@@ -1,0 +1,18 @@
+version: '2.4'
+
+services:
+  linkding:
+    image: sissbruecker/linkding:latest
+    container_name: linkding
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.linkding.loadbalancer.server.port=9090
+      - show.external=true
+    env_file: linkding.env
+    volumes:
+      - ./data:/etc/linkding/data
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: ctr-network
