@@ -1,0 +1,16 @@
+---
+version: "2.4"
+services:
+  wireguard:
+    image: 'linuxserver/wireguard:alpine'
+    container_name: wireguard
+    env_file: vpn.env
+    volumes:
+      - './config:/config'
+    ports:
+      - 51820:51820/udp
+    restart: 'unless-stopped'
+    cap_add:
+    - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
