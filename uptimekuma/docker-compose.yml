@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   uptimekuma:
-    image: 'louislam/uptime-kuma'
+    image: 'louislam/uptime-kuma:latest'
     container_name: uptimekuma
     labels:
       - traefik.enable=true
@@ -11,7 +11,6 @@ services:
     environment:
       - PUID=9001
       - PGID=9001
-      - TZ="Australia/Melbourne"
     volumes:
       - '/ctr_cfg/uptimekuma/config:/app/data'
       - '/mnt/downloads:/tv'

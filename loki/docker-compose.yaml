@@ -6,7 +6,7 @@ services:
     container_name: loki
     volumes:
       - ./loki-config.yaml:/etc/loki/config.yaml
-      - ./data:/data/loki
+      - /ctr_data/loki/data:/data/loki
     user: "9001:9001"
     ports:
       - 127.0.0.1:3100:3100
