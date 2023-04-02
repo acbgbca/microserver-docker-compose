@@ -12,6 +12,8 @@ services:
       - 127.0.0.1:3100:3100
     command: -config.file=/etc/loki/config.yaml
     restart: unless-stopped
+    logging:
+      driver: local
 networks:
   default:
     external: true
