@@ -1,0 +1,21 @@
+version: '2.4'
+
+services:
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
+    user: 9001:9001
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.overseerr.loadbalancer.server.port=5055
+      - show.external=true
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Australia/Melbourne
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: ctr-network

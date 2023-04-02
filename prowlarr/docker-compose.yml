@@ -1,0 +1,21 @@
+version: '2.4'
+
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+      - show.external=true
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ=Australia/Melbourne
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: ctr-network
