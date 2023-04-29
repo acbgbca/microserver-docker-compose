@@ -34,6 +34,7 @@ services:
       - '--housekeeping_interval=30s'
       - '--docker_only=true'
       - '--disable_metrics=percpu,sched,tcp,udp,disk'
+      - '--store_container_labels=false'
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
