@@ -1,9 +1,10 @@
 ---
-version: "3.7"
+version: "2.4"
 services:
   uptimekuma:
     image: 'louislam/uptime-kuma:latest'
     container_name: uptimekuma
+    mem_limit: 128m
     labels:
       - traefik.enable=true
       - traefik.http.services.uptimekuma.loadbalancer.server.port=3001
@@ -13,8 +14,6 @@ services:
       - PGID=9001
     volumes:
       - '/ctr_cfg/uptimekuma/config:/app/data'
-      - '/mnt/downloads:/tv'
-      - '/mnt/videos:/media'
     restart: 'unless-stopped'
 networks:
   default:
