@@ -57,22 +57,6 @@ services:
       - ./ext_letsencrypt:/letsencrypt
     depends_on:
       - autheliaexternal
-    logging:
-      driver: loki
-      options:
-        mode: non-blocking
-        loki-url: "http://localhost:3100/loki/api/v1/push"
-        loki-pipeline-stages: |
-          - multiline:
-              firstline: '^time='
-              max_wait_time: 3s
-          - regex:
-              expression: 'level=(?P<level>\w{4,5})'
-          - replace:
-              expression: 'level=(?P<level>\w{4,5})'
-              replace: '{{ .Value | ToUpper}}'
-          - labels:
-              level:
 
   autheliaexternal:
     image: authelia/authelia:latest
@@ -95,22 +79,6 @@ services:
       - no-new-privileges:true
     depends_on:
       - redis
-    logging:
-      driver: loki
-      options:
-        mode: non-blocking
-        loki-url: "http://localhost:3100/loki/api/v1/push"
-        loki-pipeline-stages: |
-          - multiline:
-              firstline: '^time='
-              max_wait_time: 3s
-          - regex:
-              expression: 'level=(?P<level>\w{4,5})'
-          - replace:
-              expression: 'level=(?P<level>\w{4,5})'
-              replace: '{{ .Value | ToUpper}}'
-          - labels:
-              level:
   redis:
     image: redis:alpine
     restart: unless-stopped

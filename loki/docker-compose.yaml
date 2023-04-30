@@ -12,8 +12,17 @@ services:
       - 3100:3100
     command: -config.file=/etc/loki/config.yaml
     restart: unless-stopped
-    logging:
-      driver: local
+  promtail:
+    image:  grafana/promtail:latest
+    container_name: promtail
+    volumes:
+      - ./promtail.yaml:/etc/promtail/docker-config.yaml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/docker-config.yaml
+    depends_on:
+      - loki
+  
 networks:
   default:
     external: true

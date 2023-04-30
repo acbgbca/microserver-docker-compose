@@ -22,19 +22,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    logging:
-      driver: loki
-      options:
-        mode: non-blocking
-        loki-url: "http://localhost:3100/loki/api/v1/push"
-        loki-pipeline-stages: |
-          - multiline:
-              firstline: '^\d{4}-\d{2}-\d{2}'
-              max_wait_time: 3s
-          - regex:
-              expression: ':(?P<level>\w{4,5}):'
-          - labels:
-              level:
 networks:
   default:
     external: true

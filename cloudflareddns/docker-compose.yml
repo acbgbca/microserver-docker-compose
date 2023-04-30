@@ -6,11 +6,3 @@ services:
     container_name: cloudflareddns
     env_file: ddns.env
     restart: 'unless-stopped'
-    logging:
-      driver: loki
-      options:
-        mode: non-blocking
-        loki-url: "http://localhost:3100/loki/api/v1/push"
-        loki-pipeline-stages: |
-          - labels:
-              level: INFO
