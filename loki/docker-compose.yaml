@@ -20,6 +20,7 @@ services:
       - ./config:/config
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
+      - /var/log:/logs:ro
     command: -config.file=/etc/promtail/docker-config.yaml
     depends_on:
       - loki
