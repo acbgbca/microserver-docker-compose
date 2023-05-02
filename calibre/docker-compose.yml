@@ -1,0 +1,40 @@
+---
+version: "2.4"
+services:
+  calibre:
+    image: 'lscr.io/linuxserver/calibre-web:latest'
+    container_name: calibre
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.calibre.loadbalancer.server.port=8083
+      - show.external=true
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
+    volumes:
+      - './config:/config'
+      - '/mnt/calibre/books:/books'
+    restart: 'unless-stopped'
+  calibreserver:
+    image: 'lscr.io/linuxserver/calibre:latest'
+    container_name: calibreserver
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.calibreserver.loadbalancer.server.port=8080
+      - show.external=true
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=9001
+      - PGID=9001
+    volumes:
+      - './server:/config'
+      - '/mnt/calibre/books:/books'
+      - '/mnt/calibre/import:/import'
+    restart: 'unless-stopped'
+
+networks:
+  default:
+    external: true
+    name: ctr-network
