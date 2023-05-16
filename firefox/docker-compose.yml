@@ -4,6 +4,7 @@ services:
   firefox:
     image: ghcr.io/vmorganp/lazytainer:master
     container_name: firefox
+    mem_limit: 64m
     labels:
       - traefik.enable=true
       - traefik.http.services.firefox.loadbalancer.server.port=3000
