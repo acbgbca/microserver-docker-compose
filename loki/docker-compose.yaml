@@ -22,6 +22,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/log:/logs:ro
     command: -config.file=/etc/promtail/docker-config.yaml
+    restart: unless-stopped
     depends_on:
       - loki
   
