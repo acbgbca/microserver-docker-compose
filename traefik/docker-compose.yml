@@ -29,8 +29,6 @@ services:
       - "--serversTransport.insecureSkipVerify=true"
       - "--accesslog=true"
       - "--accesslog.filters.statuscodes=300-399,400-499,500-599"
-      - "--providers.file=true"
-      - "--providers.file.filename=/config/rules.yaml"
     environment:
       - "CF_ZONE_API_TOKEN=$API_TOKEN"
       - "CF_DNS_API_TOKEN=$API_TOKEN"
@@ -40,7 +38,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./certs:/certs
       - ./config:/config
       - ./letsencrypt:/letsencrypt
     ports:
