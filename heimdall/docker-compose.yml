@@ -1,12 +1,13 @@
 ---
 version: "3.7"
 services:
-  microserver:
+  dashboard:
     image: 'linuxserver/heimdall:latest'
     container_name: heimdall
     labels:
       - traefik.enable=true
-      - traefik.http.services.microserver.loadbalancer.server.port=80
+      - traefik.http.services.dashboard.loadbalancer.server.port=80
+      - show.external=true
     environment:
       - PUID=9001
       - PGID=9001
