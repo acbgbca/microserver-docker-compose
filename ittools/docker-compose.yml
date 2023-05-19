@@ -1,0 +1,15 @@
+---
+version: "2.4"
+services:
+  ittools:
+    image: 'corentinth/it-tools:latest'
+    container_name: ittools
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.ittools.loadbalancer.server.port=80
+      - show.external=true
+    restart: 'unless-stopped'
+networks:
+  default:
+    external: true
+    name: ctr-network
