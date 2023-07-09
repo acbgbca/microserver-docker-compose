@@ -23,8 +23,13 @@ find "./plex/config/Library/Application Support/Plex Media Server/Cache/PhotoTra
 for d in */ ; do
 	# Remove trailing slash from directory
 	d=${d%/}
-	echo "Backing up $d"
 	cd $d
+	if [ -f ".no_upgrade" ]; then
+		echo "Skipping $d"
+		cd ..
+		continue
+	fi
+	echo "Backing up $d"
 	docker-compose down
 	if [ $d = "plex" ]
 	then
@@ -35,14 +40,11 @@ for d in */ ; do
 	fi
 	su -c "cp $bd/$d.tgz /mnt/backup/$date/" ctrdata
 
-	if [ -f ".no_upgrade" ]; then
-		echo "Skipping $d"
-	else
-		echo "Upgrading $d"
-		docker-compose pull --ignore-pull-failures
+	echo "Upgrading $d"
+	docker-compose pull --ignore-pull-failures
 
-		docker-compose up -d --remove-orphans
-	fi
+	docker-compose up -d --remove-orphans
+	
 	cd ..
 done
 
