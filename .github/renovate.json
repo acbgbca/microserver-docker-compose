@@ -1,6 +1,8 @@
 {
     "platform": "github",
     "prHourlyLimit": 0,
+    "automergeType": "branch",
+    "ignoreTests": true,
     "packageRules": [
         {
             "description": "Automatically merge minor and patch-level updates",
