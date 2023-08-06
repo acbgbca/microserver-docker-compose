@@ -12,7 +12,8 @@
             "description": "Create PR for major versions",
             "matchUpdateTypes": ["major"],
             "automerge": false,
-            "assigneesFromCodeOwners": true
+            "assigneesFromCodeOwners": true,
+            "excludePackageNames": ["postgres"]
         }
     ]
 }
