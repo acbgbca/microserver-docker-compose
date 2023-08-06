@@ -1,5 +1,6 @@
 {
     "platform": "github",
+    "prHourlyLimit": 0,
     "packageRules": [
         {
             "description": "Automatically merge minor and patch-level updates",
