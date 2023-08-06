@@ -1,5 +1,5 @@
 {
-    "automerge": true,
+    "automerge": false,
     "username": "renovate-release",
     "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
     "platform": "github"
