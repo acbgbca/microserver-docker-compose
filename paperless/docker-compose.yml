@@ -1,13 +1,13 @@
 version: "2.4"
 services:
   broker:
-    image: docker.io/library/redis:7
+    image: docker.io/library/redis:7.0.12
     restart: unless-stopped
     volumes:
       - ./redisdata:/data
 
   db:
-    image: docker.io/library/postgres:13
+    image: docker.io/library/postgres:13.11
     restart: unless-stopped
     volumes:
       - ./pgdata:/var/lib/postgresql/data
@@ -17,7 +17,7 @@ services:
       POSTGRES_PASSWORD: paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:1.17.0
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
@@ -60,7 +60,7 @@ services:
       - "--chromium-allow-list=file:///tmp/.*"
 
   tika:
-    image: ghcr.io/paperless-ngx/tika:latest
+    image: ghcr.io/paperless-ngx/tika:2.8.0-minimal
     restart: unless-stopped
 
 networks:

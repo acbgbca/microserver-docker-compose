@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   overseerr:
-    image: sctx/overseerr:latest
+    image: sctx/overseerr:1.33.2
     container_name: overseerr
     user: 9001:9001
     labels:
