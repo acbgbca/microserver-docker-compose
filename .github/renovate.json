@@ -3,6 +3,7 @@
     "prHourlyLimit": 0,
     "automergeType": "branch",
     "ignoreTests": true,
+    "schedule": ["every weekday", "on Sunday"],
     "packageRules": [
         {
             "description": "Automatically merge minor and patch-level updates",
