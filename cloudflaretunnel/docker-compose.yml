@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   cloudflared:
-    image: 'cloudflare/cloudflared:2022.12.1'
+    image: 'cloudflare/cloudflared:2023.7.3'
     container_name: cloudflared
     user: 9001:9001
     volumes:
