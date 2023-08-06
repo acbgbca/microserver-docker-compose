@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   sabnzbd:
-    image: 'linuxserver/sabnzbd'
+    image: 'linuxserver/sabnzbd:4.0.3'
     container_name: sabnzbd
     labels:
       - traefik.enable=true

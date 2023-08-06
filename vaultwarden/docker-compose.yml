@@ -3,7 +3,7 @@ version: "2.4"
 services:
   vaultwarden:
     container_name: vaultwarden
-    image: "vaultwarden/server:latest"
+    image: "vaultwarden/server:1.29.1"
     user: "9001:9001"
     labels:
       - traefik.enable=true
