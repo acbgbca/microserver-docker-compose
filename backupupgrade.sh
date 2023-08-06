@@ -16,6 +16,8 @@ echo "Backup Directory: $bd"
 
 cd $wd
 
+su -c "git fetch && git pull --commit" devops
+
 # Before we start, clean up the plex cache
 # This removes all cache files older than 5 days
 find "./plex/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -type f -mtime +5 -delete
