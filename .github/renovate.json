@@ -1,15 +1,14 @@
 {
     "platform": "github",
     "prHourlyLimit": 0,
-    "automergeType": "branch",
     "ignoreTests": true,
     "schedule": ["every weekday", "on Sunday"],
     "packageRules": [
         {
             "description": "Automatically merge minor and patch-level updates",
             "matchUpdateTypes": ["minor", "patch", "digest"],
-            "automerge": true,
-            "automergeType": "branch"
+            "automerge": false,
+            "assigneesFromCodeOwners": true
         },
         {
             "description": "Create PR for major versions",
