@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   freshrss:
-    image: freshrss/freshrss:latest
+    image: freshrss/freshrss:1.21.0
     container_name: freshrss
     labels:
       - traefik.enable=true
@@ -16,7 +16,7 @@ services:
       - './extensions:/var/www/FreshRSS/extensions'
     restart: 'unless-stopped'
   rssbridge:
-    image: rssbridge/rss-bridge:latest
+    image: rssbridge/rss-bridge@sha256:60f59cd363faee594a4d77636fe007979b39bd6783b958e073ea20e2548d4610
     container_name: rssbridge
     labels:
       - traefik.enable=true

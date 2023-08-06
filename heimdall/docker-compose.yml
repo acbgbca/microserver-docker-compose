@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   dashboard:
-    image: 'linuxserver/heimdall:latest'
+    image: 'linuxserver/heimdall:2.5.6'
     container_name: heimdall
     labels:
       - traefik.enable=true

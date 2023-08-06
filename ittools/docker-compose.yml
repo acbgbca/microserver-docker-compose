@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   ittools:
-    image: 'corentinth/it-tools:latest'
+    image: 'corentinth/it-tools:2023.5.14-77f2efc'
     container_name: ittools
     labels:
       - traefik.enable=true
