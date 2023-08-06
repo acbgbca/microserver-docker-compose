@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   minecraft:
-    image: acbca/minecraft-bedrock:1.19
+    image: acbca/minecraft-bedrock:1.20
     container_name: minecraft
     environment:
       - UID=9001
