@@ -1,4 +1,17 @@
 {
-    "automerge": false,
-    "platform": "github"
+    "platform": "github",
+    "packageRules": [
+        {
+            "description": "Automatically merge minor and patch-level updates",
+            "matchUpdateTypes": ["minor", "patch", "digest"],
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
+            "description": "Create PR for major versions",
+            "matchUpdateTypes": ["major"],
+            "automerge": false,
+            "assigneesFromCodeOwners": true
+        }
+    ]
 }
