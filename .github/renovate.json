@@ -6,9 +6,14 @@
     "schedule": ["every weekday", "on Sunday"],
     "packageRules": [
         {
-            "description": "Ignore previous yyyy.MM.dd versions",
-            "matchPackageNames": ["transmission", "calibre-web", "heimdall"],
-            "allowedVersions": "< 2000.0"
+            "description": "Match specific Linux Server io versions",
+            "matchPackageNames": ["calibre-web", "heimdall"],
+            "allowedVersions": "/^version-[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+        },
+        {
+            "description": "Match specific Linux Server io versions",
+            "matchPackageNames": ["transmission"],
+            "allowedVersions": "/^[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
         },
         {
             "description": "Automatically merge minor and patch-level updates",
