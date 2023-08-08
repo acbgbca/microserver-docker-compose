@@ -6,12 +6,17 @@
     "schedule": ["every weekday", "on Sunday"],
     "packageRules": [
         {
-            "description": "Match specific Linux Server io versions",
+            "description": "Ignore old yyyy-MM-dd versions",
             "matchPackageNames": [
-                "ghcr.io/linuxserver/calibre-web",
                 "ghcr.io/linuxserver/heimdall",
                 "ghcr.io/linuxserver/transmission"],
             "allowedVersions": "< 2000.0"
+        },
+        {
+            "description": "Ignore old calibre-web versions",
+            "matchPackageNames": [
+                "ghcr.io/linuxserver/calibre-web"],
+            "allowedVersions": "< 5.0"
         },
         {
             "description": "Automatically merge minor and patch-level updates",
