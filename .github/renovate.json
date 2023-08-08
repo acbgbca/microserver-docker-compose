@@ -27,7 +27,7 @@
             "description": "Create PR for major versions",
             "matchUpdateTypes": ["major"],
             "automerge": false,
-            "excludePackageNames": ["postgres, redis"]
+            "excludePackageNames": ["postgres", "redis"]
         }
     ]
 }
