@@ -3,7 +3,7 @@
     "assignees": ["acbgbca"],
     "prHourlyLimit": 0,
     "ignoreTests": true,
-    "schedule": ["on Friday"],
+    "schedule": ["on Thursday"],
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
