@@ -3,7 +3,7 @@
     "assignees": ["acbgbca"],
     "prHourlyLimit": 0,
     "ignoreTests": true,
-    "schedule": ["every weekday", "on Sunday"],
+    "schedule": ["on Friday"],
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
@@ -19,8 +19,14 @@
             "allowedVersions": "< 5.0"
         },
         {
+            "description": "Automatically digest updates",
+            "matchUpdateTypes": ["digest"],
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
             "description": "Automatically merge minor and patch-level updates",
-            "matchUpdateTypes": ["minor", "patch", "digest"],
+            "matchUpdateTypes": ["minor", "patch"],
             "automerge": false
         },
         {
