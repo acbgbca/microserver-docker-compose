@@ -16,7 +16,7 @@ echo "Backup Directory: $bd"
 
 cd $wd
 
-su -c "git fetch && git pull --commit" devops
+su -c "git pull --ff-only origin main" devops
 
 # Before we start, clean up the plex cache
 # This removes all cache files older than 5 days
