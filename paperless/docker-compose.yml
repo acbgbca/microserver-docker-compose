@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   broker:
-    image: docker.io/library/redis:7.0.12
+    image: docker.io/library/redis:7.2.0
     restart: unless-stopped
     volumes:
       - ./redisdata:/data
