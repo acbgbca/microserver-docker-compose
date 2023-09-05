@@ -1,0 +1,24 @@
+---
+version: "2.4"
+
+services:
+  ldap:
+    image: lldap/lldap:v0.4.3
+    container_name: ldap
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.ldap.loadbalancer.server.port=17170
+    volumes:
+      - "./data:/data"
+    environment:
+      - UID=9001
+      - GID=9001
+      - TZ="Australia/Melbourne"
+      - LLDAP_JWT_SECRET=$LLDAP_JWT_SECRET
+      - LLDAP_LDAP_USER_PASS=$LLDAP_LDAP_USER_PASS
+      - LLDAP_LDAP_BASE_DN=$LLDAP_LDAP_BASE_DN
+
+networks:
+  default:
+    external: true
+    name: ctr-network

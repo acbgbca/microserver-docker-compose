@@ -76,6 +76,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./ext_authelia:/config
+    networks:
+      - default
+      - ctrnetwork
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
