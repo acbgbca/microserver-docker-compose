@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   loki:
-    image: grafana/loki:2.8.4
+    image: grafana/loki:2.9.0
     container_name: loki
     volumes:
       - ./loki-config.yaml:/etc/loki/config.yaml
