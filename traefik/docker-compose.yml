@@ -68,6 +68,12 @@ services:
     networks:
       - internal
       - default
+    healthcheck:
+      test: ["CMD", "/app/healthcheck.sh"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 15s
   redis:
     image: redis:7.2.1-alpine
     restart: unless-stopped
