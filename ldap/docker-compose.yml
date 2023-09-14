@@ -3,7 +3,7 @@ version: "2.4"
 
 services:
   ldap:
-    image: lldap/lldap:v0.4.3
+    image: lldap/lldap:v0.5.0
     container_name: ldap
     labels:
       - traefik.enable=true
