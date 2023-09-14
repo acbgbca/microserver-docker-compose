@@ -24,7 +24,7 @@ services:
       - playwright-chrome
   playwright-chrome:
     hostname: playwright-chrome
-    image: browserless/chrome:latest@sha256:db927629b15ae223f6083360eb97d27d43e63bbaf9700ea580aee6ac059a4b17
+    image: browserless/chrome:latest@sha256:08eaa144d34a4e419926118d1f706d28836ae5ff2a19a772f6734c8a67042fe3
     restart: unless-stopped
 
 networks:
