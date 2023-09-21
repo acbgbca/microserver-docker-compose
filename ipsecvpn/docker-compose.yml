@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   ipsecvpn:
-    image: 'hwdsl2/ipsec-vpn-server:debian@sha256:c5f18d0c295991a2972414f2776ea9ca645510423f2e465f7887a3604d089095'
+    image: 'hwdsl2/ipsec-vpn-server:debian@sha256:50101a4480fe154c1f58c2d6fb4d14df14441529189fb77fc9793cd6499e9fdd'
     container_name: ipsecvpn
     env_file: vpn.env
     volumes:
