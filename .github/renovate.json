@@ -25,15 +25,23 @@
             "automergeType": "branch"
         },
         {
-            "description": "Automatically merge minor and patch-level updates",
-            "matchUpdateTypes": ["minor", "patch"],
-            "automerge": false
+            "description": "Automatically merge patch-level updates",
+            "matchUpdateTypes": ["patch"],
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
+            "description": "Automatically merge minor updates",
+            "matchUpdateTypes": ["minor"],
+            "automerge": true,
+            "automergeType": "branch",
+            "excludePackageNames": ["ghcr.io/acbgbca/minecraft-bedrock"]
         },
         {
             "description": "Create PR for major versions",
             "matchUpdateTypes": ["major"],
             "automerge": false,
-            "excludePackageNames": ["postgres"]
+            "excludePackageNames": ["postgres", "docker.io/library/postgres"]
         }
     ]
 }
