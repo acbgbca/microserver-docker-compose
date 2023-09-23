@@ -1,5 +1,5 @@
-#!/bin/sh
-set -e
+#!/bin/bash
+set -euo pipefail
 
 wd=${1:-/ctr_cfg}
 date=`date "+%Y%m%d"`
@@ -22,6 +22,7 @@ su -c "git pull --ff-only origin main" devops
 # This removes all cache files older than 5 days
 find "./plex/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -type f -mtime +5 -delete
 
+set +e
 for d in */ ; do
 	# Remove trailing slash from directory
 	d=${d%/}
@@ -31,24 +32,34 @@ for d in */ ; do
 		cd ..
 		continue
 	fi
-	echo "Backing up $d"
-	docker-compose down
-	if [ $d = "plex" ]
-	then
-		# Exclude paths not required for restore
-		tar --exclude='config/Library/Application Support/Plex Media Server/Cache' --exclude='config/Library/Application Support/Plex Media Server/Crash Reports' --exclude='config/Library/Application Support/Plex Media Server/Logs' --exclude='config/Library/Application Support/Plex Media Server/Media' -czf $bd/$d.tgz ../$d
+	(
+		set -e
+		echo "Backing up $d"
+		docker-compose down
+		if [ $d = "plex" ]
+		then
+			# Exclude paths not required for restore
+			tar --exclude='config/Library/Application Support/Plex Media Server/Cache' --exclude='config/Library/Application Support/Plex Media Server/Crash Reports' --exclude='config/Library/Application Support/Plex Media Server/Logs' --exclude='config/Library/Application Support/Plex Media Server/Media' -czf $bd/$d.tgz ../$d
+		else
+			tar -czf $bd/$d.tgz ../$d
+		fi
+		su -c "cp $bd/$d.tgz /mnt/backup/$date/" ctrdata
+
+		echo "Upgrading $d"
+		docker-compose pull
+
+		docker-compose up -d --remove-orphans
+	)
+	result=$?
+	if [ $result -ne 0 ] ; then
+		echo "Error upgrading $d";
 	else
-		tar -czf $bd/$d.tgz ../$d
+		echo "$d upgraded successfully";
 	fi
-	su -c "cp $bd/$d.tgz /mnt/backup/$date/" ctrdata
-
-	echo "Upgrading $d"
-	docker-compose pull --ignore-pull-failures
-
-	docker-compose up -d --remove-orphans
 	
 	cd ..
 done
+set -e
 
 # Remove old images
 docker image prune -f
