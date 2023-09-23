@@ -13,8 +13,6 @@ services:
       - '/tmp/transcode:/transcode'
       - '/mnt/videos:/data'
       - '/mnt/music:/music'
-    mem_limit: 2048m
-    cpus: 2
     ports:
       - 32400:32400/tcp
       - 1900:1900/udp
