@@ -16,7 +16,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
   firefoxbackend:
-    image: 'ghcr.io/linuxserver/firefox:116.0.3@sha256:23e2756471a384f62718377a3947164cad38795fbdf19be886d01c4b104a7d04'
+    image: 'ghcr.io/linuxserver/firefox:116.0.3@sha256:43e96c23b45a4d578138ee98fb05b5ef4ad142be065bcdb395fb3811ccab1a91'
     container_name: firefoxbackend
     shm_size: "1gb"
     network_mode: service:firefox
