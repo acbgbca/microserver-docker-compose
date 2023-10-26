@@ -24,7 +24,7 @@ services:
       - playwright-chrome
   playwright-chrome:
     hostname: playwright-chrome
-    image: browserless/chrome:latest@sha256:6703f443930293d513c7e80c0f26301ea2040e0881c900b3234e088d4f58af35
+    image: browserless/chrome:latest@sha256:e6669d9ab78de6eb8e155a37d343f231b0f2fb1eac00e693890ebe4f9aa39ae8
     labels:
       - traefik.enable=true
       - traefik.http.services.playwright-chrome.loadbalancer.server.port=3000
