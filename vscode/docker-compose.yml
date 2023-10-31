@@ -1,0 +1,28 @@
+---
+version: "2.4"
+services:
+  vscode:
+    image: 'codercom/code-server:4.18.0'
+    container_name: vscode
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.vscode.loadbalancer.server.port=8080
+      - show.external=true
+    user: "9001:9001"
+    environment:
+      - DOCKER_USER=ctrdata
+    volumes:
+      - './local:/home/coder/.local'
+      - './config:/home/coder/.config'
+      - './code:/home/coder/project'
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
+networks:
+  default:
+    external: true
+    name: ctr-network
