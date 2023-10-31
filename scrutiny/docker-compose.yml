@@ -1,0 +1,36 @@
+---
+version: "2.4"
+services:
+  scrutiny:
+    image: 'ghcr.io/analogj/scrutiny:master-web'
+    container_name: scrutiny
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.scrutiny.loadbalancer.server.port=8080
+      - show.external=true
+    environment:
+      - SCRUTINY_WEB_INFLUXDB_HOST=scrutinydb
+    user: "9001:9001"
+    ports:
+      - 3200:8080
+    volumes:
+      - './config:/opt/scrutiny/config'
+    restart: 'unless-stopped'
+    depends_on:
+      - scrutinydb
+  scrutinydb:
+    image: 'influxdb:2.2'
+    container_name: scrutinydb
+    user: "9001:9001"
+    volumes:
+      - './data:/var/lib/influxdb2'
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+networks:
+  default:
+    external: true
+    name: ctr-network
