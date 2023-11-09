@@ -19,7 +19,7 @@ services:
     depends_on:
       - scrutinydb
   scrutinydb:
-    image: 'influxdb:2.2'
+    image: 'influxdb:2.7'
     container_name: scrutinydb
     user: "9001:9001"
     volumes:
