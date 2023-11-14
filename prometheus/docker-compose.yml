@@ -33,7 +33,7 @@ services:
     command:
       - '--housekeeping_interval=30s'
       - '--docker_only=true'
-      - '--disable_metrics=percpu,sched,tcp,udp,disk'
+      - '--disable_metrics=percpu,sched,tcp,udp,disk,referenced_memory'
       - '--store_container_labels=false'
     security_opt:
       - no-new-privileges:true
