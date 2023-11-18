@@ -1,40 +1,19 @@
 version: "2.4"
 services:
   changedetector:
-    image: ghcr.io/dgtlmoon/changedetection.io:0.45
+    image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:6b971422252eb7a3e1e6838069de074a0bc0ff8bfbf80fe155774fa201f1f08f
     container_name: changedetector
     restart: unless-stopped
     labels:
       - traefik.enable=true
       - traefik.http.services.changedetector.loadbalancer.server.port=5000
       - show.external=true
-    # healthcheck:
-    #   test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:5000"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
     volumes:
       - ./data:/datastore
     environment:
       - PUID=9001
       - PGID=9001
       - USE_X_SETTINGS=1
-      - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
-    depends_on:
-      - playwright-chrome
-  playwright-chrome:
-    hostname: playwright-chrome
-    image: browserless/chrome:latest@sha256:bfe615e119f2ccd54cc76c3483d97979f43f97b826496aec905b759e519a9d8b
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.playwright-chrome.loadbalancer.server.port=3000
-      - show.external=true
-    environment:
-      - ENABLE_API_GET=true
-      - DEFAULT_LAUNCH_ARGS=["--window-size=1920,1080"]
-      - DEFAULT_IGNORE_HTTPS_ERRORS=true
-      - ENABLE_CORS=true
-    restart: unless-stopped
 
 networks:
   default:
