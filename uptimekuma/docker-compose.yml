@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   uptimekuma:
-    image: 'louislam/uptime-kuma:1.23.7-debian'
+    image: 'louislam/uptime-kuma:1.23.8-debian'
     container_name: uptimekuma
     labels:
       - traefik.enable=true
