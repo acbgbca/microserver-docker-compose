@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   bazarr:
-    image: 'ghcr.io/linuxserver/bazarr:1.4.0@sha256:2b38e9e2c912bca6a3d53f2f7c9f9d02cdfa08e4a3f43988245cc520e05d3c55'
+    image: 'ghcr.io/linuxserver/bazarr:1.4.0@sha256:6d67ccdb14f426f61e65c289f9f121ab314c3c39159099af8fa6dcdea5add1f0'
     container_name: bazarr
     labels:
       - traefik.enable=true
