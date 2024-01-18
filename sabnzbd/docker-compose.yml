@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   sabnzbd:
-    image: 'ghcr.io/linuxserver/sabnzbd:4.2.1@sha256:05057782e015af33286abf3fb1559c04cfb71c51445ef58e3a59f02916e8c1dc'
+    image: 'ghcr.io/linuxserver/sabnzbd:4.2.1@sha256:a633d0d2b10775955d28445f08bc878de36e9466158150b3721a792af542e786'
     container_name: sabnzbd
     labels:
       - traefik.enable=true
