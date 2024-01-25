@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   calibre:
-    image: 'ghcr.io/linuxserver/calibre-web:0.6.21@sha256:1d0fed72f63c966835ef52f77a9ed12af15ab94033e7d5bd5fcdacadec1e8512'
+    image: 'ghcr.io/linuxserver/calibre-web:0.6.21@sha256:ada50020182cdb6b1187613cf6503eb786fee67924f20d3afc2ce98bbfb5b595'
     container_name: calibre
     labels:
       - traefik.enable=true
