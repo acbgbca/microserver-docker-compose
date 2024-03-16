@@ -15,6 +15,7 @@ services:
       - './local:/home/coder/.local'
       - './config:/home/coder/.config'
       - './code:/home/coder/project'
+      - '.gitconfig:/home/coder/.gitconfig'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
