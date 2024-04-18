@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   changedetector:
-    image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:20ac8284d3cb556c3fb13b03359e1040134f83d5cac4494ec7c008d83005db7d
+    image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:a1c031035ca1a10d3d097254200207b2df5ed9eac1c7da28f712a3471618ada6
     container_name: changedetector
     restart: unless-stopped
     labels:
