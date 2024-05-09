@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   firefox:
-    image: ghcr.io/vmorganp/lazytainer:2.0.21
+    image: ghcr.io/vmorganp/lazytainer:2.0.22
     container_name: firefox
     mem_limit: 64m
     labels:
