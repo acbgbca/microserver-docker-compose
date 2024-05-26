@@ -41,3 +41,6 @@ compactor:
   working_directory: /data/loki/compactor
   shared_store: filesystem
   compaction_interval: 5m
+
+query_scheduler:
+  max_outstanding_requests_per_tenant: 2048
