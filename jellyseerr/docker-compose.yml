@@ -1,13 +1,13 @@
 version: '2.4'
 
 services:
-  overseerr:
-    image: sctx/overseerr:1.33.2
-    container_name: overseerr
+  jellyseerr:
+    image: fallenbagel/jellyseerr:1.8.1
+    container_name: jellyseerr
     user: 9001:9001
     labels:
       - traefik.enable=true
-      - traefik.http.services.overseerr.loadbalancer.server.port=5055
+      - traefik.http.services.jellyseerr.loadbalancer.server.port=5055
       - show.external=true
     environment:
       - LOG_LEVEL=info
