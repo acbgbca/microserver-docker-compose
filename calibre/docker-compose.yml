@@ -17,7 +17,7 @@ services:
       - '/mnt/calibre/books:/books'
     restart: 'unless-stopped'
   calibreserver:
-    image: 'ghcr.io/linuxserver/calibre:7.10.0@sha256:7d19a20a9e4f5e7f6d5fac9baf7f60944554904de46a5bef3d0d6cf2c5118bf4'
+    image: 'ghcr.io/linuxserver/calibre:7.11.0@sha256:c429ecd5eb61b28702b140e1a92b81150d1fd34800946215f115da93cf6bb6ea'
     container_name: calibreserver
     labels:
       - traefik.enable=true
