@@ -17,7 +17,7 @@ services:
       POSTGRES_PASSWORD: paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.8.6
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.9.0
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
