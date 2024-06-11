@@ -1,0 +1,22 @@
+version: '2'
+services:
+  lazylibrarian:
+    image: ghcr.io/linuxserver/lazylibrarian:latest@sha256:1e4dd75fbdf0349c0ca3eb3c204cd474d5e836ce2bf90914e203c4f559f7f342
+    container_name: lazylibrarian
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.lazylibrarian.loadbalancer.server.port=5299
+      - show.external=true
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ="Australia/Melbourne"
+    volumes:
+      - ./config:/config
+      - /mnt/downloads/:/media
+      - /mnt/calibre/import/:/blackhole 
+    restart: 'unless-stopped'
+networks:
+  default:
+    external: true
+    name: ctr-network
