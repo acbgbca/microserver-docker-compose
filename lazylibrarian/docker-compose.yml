@@ -14,7 +14,8 @@ services:
     volumes:
       - ./config:/config
       - /mnt/downloads/:/media
-      - /mnt/calibre/import/:/blackhole 
+      - /mnt/calibre/import/:/blackhole
+      - /mnt/calibre/books:/books:ro
     restart: 'unless-stopped'
 networks:
   default:
