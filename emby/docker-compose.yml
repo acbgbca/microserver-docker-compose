@@ -1,0 +1,25 @@
+version: '2'
+services:
+  emby:
+    image: emby/embyserver:4.9.0.20
+    container_name: emby
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.emby.loadbalancer.server.port=8096
+      - traefik.http.middlewares.embyStripPrefix.stripprefix.prefixes=/random
+      - traefik.http.routers.emby.middlewares=embyStripPrefix@docker
+    environment:
+      - UID=9001
+      - GID=9001
+    volumes:
+      - ./config:/config
+      - /ctr_data/emby/cache:/cache
+      - '/mnt/videos:/data'
+      - /tmp/emby:/transcode
+    restart: 'unless-stopped'
+    ports:
+      - 8096:8096/tcp
+networks:
+  default:
+    external: true
+    name: ctr-network
