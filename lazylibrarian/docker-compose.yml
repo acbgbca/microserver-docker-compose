@@ -1,7 +1,7 @@
 version: '2'
 services:
   lazylibrarian:
-    image: ghcr.io/linuxserver/lazylibrarian:latest@sha256:b0c65e2aa10bb93b330862e5fec7a6fbc6330bccd9fdca411aa042f3fbe67aec
+    image: ghcr.io/linuxserver/lazylibrarian:latest@sha256:05b3eb7c09bc0bc397cebea680f5d873b7b96fc00d0608b495f9aedbfa608f29
     container_name: lazylibrarian
     labels:
       - traefik.enable=true
