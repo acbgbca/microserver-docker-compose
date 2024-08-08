@@ -46,7 +46,7 @@ services:
     depends_on:
       - authelia
   authelia:
-    image: authelia/authelia:4.38.9
+    image: authelia/authelia:4.38.10
     container_name: authelia
     labels:
       - traefik.enable=true
