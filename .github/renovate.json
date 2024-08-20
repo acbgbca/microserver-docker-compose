@@ -1,7 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["config:recommended"],
-    "platform": "github",
     "assignees": ["acbgbca"],
     "prHourlyLimit": 0,
     "ignoreTests": true,
