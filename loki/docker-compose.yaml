@@ -13,7 +13,7 @@ services:
     command: -config.file=/etc/loki/config.yaml
     restart: unless-stopped
   promtail:
-    image:  grafana/promtail:2.9.9
+    image:  grafana/promtail:2.9.10
     container_name: promtail
     volumes:
       - ./promtail.yaml:/etc/promtail/docker-config.yaml
