@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   plex:
-    image: 'plexinc/pms-docker:latest@sha256:fcc648adcf9207a9bc52954de7219effbc01114f202f4a0fad30386afaddf02b'
+    image: 'plexinc/pms-docker:latest@sha256:2faf8cb9c5f9e824de41cea420e18ad6fe8ae17905bc16bd23661bb90d96e2e4'
     container_name: plex
     labels:
       - traefik.enable=true
