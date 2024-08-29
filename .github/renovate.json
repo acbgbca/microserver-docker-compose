@@ -3,8 +3,10 @@
     "extends": ["config:recommended"],
     "assignees": ["acbgbca"],
     "prHourlyLimit": 0,
+    "branchConcurrentLimit": 0,
     "ignoreTests": true,
     "schedule": ["on Thursday"],
+    "configMigration": true,
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
