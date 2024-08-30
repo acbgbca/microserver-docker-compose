@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   linkding:
-    image: sissbruecker/linkding:1.24.0
+    image: sissbruecker/linkding:1.31.0
     container_name: linkding
     labels:
       - traefik.enable=true
