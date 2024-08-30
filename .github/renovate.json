@@ -1,53 +1,75 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:recommended", "docker:enableMajor"],
-    "assignees": ["acbgbca"],
+    "extends": [
+        "config:recommended",
+        "docker:enableMajor"
+    ],
+    "assignees": [
+        "acbgbca"
+    ],
     "prHourlyLimit": 0,
     "branchConcurrentLimit": 0,
     "ignoreTests": true,
-    "schedule": ["on Thursday"],
+    "schedule": [
+        "on Thursday"
+    ],
     "configMigration": true,
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
             "matchPackageNames": [
                 "ghcr.io/linuxserver/heimdall",
-                "ghcr.io/linuxserver/transmission"],
+                "ghcr.io/linuxserver/transmission"
+            ],
             "allowedVersions": "< 2000.0"
         },
         {
             "description": "Ignore old calibre-web versions",
             "matchPackageNames": [
-                "ghcr.io/linuxserver/calibre-web"],
+                "ghcr.io/linuxserver/calibre-web"
+            ],
             "allowedVersions": "< 5.0"
         },
         {
             "description": "Automatically merge digest updates",
-            "matchUpdateTypes": ["digest"],
+            "matchUpdateTypes": [
+                "digest"
+            ],
             "automerge": true,
             "automergeType": "branch",
             "groupName": "Digest Updates"
         },
         {
             "description": "Automatically merge patch-level updates",
-            "matchUpdateTypes": ["patch"],
+            "matchUpdateTypes": [
+                "patch"
+            ],
             "automerge": true,
             "automergeType": "branch",
             "groupName": "Patch Updates"
         },
         {
             "description": "Automatically merge minor updates",
-            "matchUpdateTypes": ["minor"],
+            "matchUpdateTypes": [
+                "minor"
+            ],
             "automerge": true,
             "automergeType": "branch",
-            "excludePackageNames": ["ghcr.io/acbgbca/minecraft-bedrock"],
-            "groupName": "Minor Updates"
+            "groupName": "Minor Updates",
+            "matchPackageNames": [
+                "!ghcr.io/acbgbca/minecraft-bedrock"
+            ]
         },
         {
             "description": "Create PR for major versions",
-            "matchUpdateTypes": ["major"],
+            "matchUpdateTypes": [
+                "major"
+            ],
             "automerge": false,
-            "excludePackageNames": ["postgres", "docker.io/library/postgres"]
+            "matchPackageNames": [
+                "!postgres",
+                "!docker.io/library/postgres"
+            ]
         }
     ]
 }
