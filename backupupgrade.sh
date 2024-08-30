@@ -35,7 +35,7 @@ for d in */ ; do
 	(
 		set -e
 		echo "Backing up $d"
-		docker-compose down
+		docker compose down
 		if [ $d = "plex" ]
 		then
 			# Exclude paths not required for restore
@@ -46,9 +46,9 @@ for d in */ ; do
 		su -c "cp $bd/$d.tgz /mnt/backup/$date/" ctrdata
 
 		echo "Upgrading $d"
-		docker-compose pull
+		docker compose pull
 
-		docker-compose up -d --remove-orphans
+		docker compose up -d --remove-orphans
 	)
 	result=$?
 	if [ $result -ne 0 ] ; then
@@ -62,7 +62,7 @@ done
 set -e
 
 # Remove old images
-docker image prune -f
+docker image prune -fa
 
 rm $bd/*.tgz
 
