@@ -22,23 +22,26 @@
             "allowedVersions": "< 5.0"
         },
         {
-            "description": "Automatically digest updates",
+            "description": "Automatically merge digest updates",
             "matchUpdateTypes": ["digest"],
             "automerge": true,
-            "automergeType": "branch"
+            "automergeType": "branch",
+            "groupName": "Digest Updates"
         },
         {
             "description": "Automatically merge patch-level updates",
             "matchUpdateTypes": ["patch"],
             "automerge": true,
-            "automergeType": "branch"
+            "automergeType": "branch",
+            "groupName": "Patch Updates"
         },
         {
             "description": "Automatically merge minor updates",
             "matchUpdateTypes": ["minor"],
             "automerge": true,
             "automergeType": "branch",
-            "excludePackageNames": ["ghcr.io/acbgbca/minecraft-bedrock"]
+            "excludePackageNames": ["ghcr.io/acbgbca/minecraft-bedrock"],
+            "groupName": "Minor Updates"
         },
         {
             "description": "Create PR for major versions",
