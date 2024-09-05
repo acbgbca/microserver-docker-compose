@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   calibre:
-    image: 'ghcr.io/linuxserver/calibre-web:0.6.23@sha256:bd3365c877cc432dc047e4c04adbf78a481e252c441886b774eb6faf7d36f960'
+    image: 'ghcr.io/linuxserver/calibre-web:0.6.23@sha256:095dc66d17b5ce04d9046ae60281e66a49dc37a03b441892a86558552ec315f7'
     container_name: calibre
     labels:
       - traefik.enable=true
@@ -17,7 +17,7 @@ services:
       - '/mnt/calibre/books:/books'
     restart: 'unless-stopped'
   calibreserver:
-    image: 'ghcr.io/linuxserver/calibre:7.17.0@sha256:74520d0b938b6c8c7f227832edb464120b6b5b75241bf88041e48107761eab39'
+    image: 'ghcr.io/linuxserver/calibre:7.17.0@sha256:11abba8a25d12467342912d608efaffbeea2af71945be8efbb2105cf7daf9d04'
     container_name: calibreserver
     labels:
       - traefik.enable=true
