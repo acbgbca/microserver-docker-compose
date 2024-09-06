@@ -18,7 +18,7 @@ cd $wd
 
 su -c "git pull --ff-only origin main" devops
 # tag with todays date to make rollback easier
-su -c "git tag -a $date -m "Version $date" && git push origin $date" devops
+su -c "git tag -a $date -m 'Version $date' && git push origin $date" devops
 
 # Before we start, clean up the plex cache
 # This removes all cache files older than 5 days
@@ -48,7 +48,7 @@ for d in */ ; do
 		su -c "cp $bd/$d.tgz /mnt/backup/$date/" ctrdata
 
 		echo "Upgrading $d"
-		docker compose pull
+		docker compose pull -q
 
 		docker compose up -d --remove-orphans
 	)
