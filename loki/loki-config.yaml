@@ -25,22 +25,26 @@ schema_config:
       index:
         prefix: index_
         period: 24h
+    - from: 2024-09-09
+      index:
+        period: 24h
+        prefix: index_
+      object_store: filesystem
+      schema: v13
+      store: tsdb
 
 storage_config:
- boltdb_shipper:
+  boltdb_shipper:
    active_index_directory: /data/loki/index
    cache_location: /data/loki/index_cache
-   shared_store: filesystem
+  tsdb_shipper:
+    active_index_directory: /data/loki/tsdb-index
+    cache_location: /data/loki/tsdb-cache
 
 limits_config:
   retention_period: 744h
   ingestion_rate_mb: 16
   ingestion_burst_size_mb: 32
-
-compactor:
-  working_directory: /data/loki/compactor
-  shared_store: filesystem
-  compaction_interval: 5m
 
 query_scheduler:
   max_outstanding_requests_per_tenant: 2048
