@@ -11,7 +11,7 @@ services:
     environment:
       - PUID=9001
       - PGID=9001
-      - DOCKER_MODS=linuxserver/mods:universal-calibre
+#      - DOCKER_MODS=linuxserver/mods:universal-calibre
     volumes:
       - './config:/config'
       - '/mnt/calibre/books:/books'
