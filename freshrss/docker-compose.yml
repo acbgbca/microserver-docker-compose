@@ -16,7 +16,7 @@ services:
       - './extensions:/var/www/FreshRSS/extensions'
     restart: 'unless-stopped'
   rssbridge:
-    image: rssbridge/rss-bridge@sha256:621b211356aee82275ed78c1fb4ed76084777dda43bc087e48a2d60121cd76ed
+    image: rssbridge/rss-bridge@sha256:4ffba14a8a79d484ed5c186ae9fdf621985936a80a95389e2a2220ce9d88c60d
     container_name: rssbridge
     labels:
       - traefik.enable=true
@@ -26,7 +26,7 @@ services:
       - ./bridge:/config
     restart: unless-stopped
   playwrightproxy:
-    image: ghcr.io/acbgbca/pw-scraper:0.72
+    image: ghcr.io/acbgbca/pw-scraper:0.73
     container_name: playwrightproxy
     environment:
       - LOG_LEVEL="debug"
