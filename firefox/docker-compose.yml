@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   firefox:
-    image: ghcr.io/vmorganp/lazytainer:2.0.27
+    image: ghcr.io/vmorganp/lazytainer:2.0.28
     container_name: firefox
     mem_limit: 64m
     labels:
@@ -16,7 +16,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
   firefoxbackend:
-    image: 'ghcr.io/linuxserver/firefox:128.0.3@sha256:71f5e06f0ae83a2bfbb2f3d90d4d57e3a3c4f44626e6f76f2940fceaa92e02d4'
+    image: 'ghcr.io/linuxserver/firefox:128.0.3@sha256:729b994a73681a08dc303dab2f844bd6b7267646d3365fb071104450c4d2af1a'
     container_name: firefoxbackend
     shm_size: "1gb"
     network_mode: service:firefox
