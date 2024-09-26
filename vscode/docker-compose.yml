@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   vscode:
-    image: 'codercom/code-server:4.92.2'
+    image: 'codercom/code-server:4.93.1'
     container_name: vscode
     labels:
       - traefik.enable=true

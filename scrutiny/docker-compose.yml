@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   scrutiny:
-    image: 'ghcr.io/analogj/scrutiny:master-web@sha256:03c25ba7e1c8ff05a1c2f71a3574233471c263bf14f72eb4e226839494b07971'
+    image: 'ghcr.io/analogj/scrutiny:master-web@sha256:e1a54bd67de81566edbf6add5b7b69ed962759b26183fde06ec05cb4f8ff3ab5'
     container_name: scrutiny
     labels:
       - traefik.enable=true

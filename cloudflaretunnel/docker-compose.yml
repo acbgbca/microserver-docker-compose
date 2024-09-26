@@ -61,7 +61,7 @@ services:
       - autheliaexternal
 
   autheliaexternal:
-    image: authelia/authelia:4.38.10
+    image: authelia/authelia:4.38.12
     container_name: autheliaexternal
     labels:
       - traefik.enable=true
