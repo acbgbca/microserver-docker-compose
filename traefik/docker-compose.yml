@@ -3,7 +3,7 @@ version: "2.4"
 
 services:
   traefik:
-    image: traefik:v3.1.4
+    image: traefik:v3.1.5
     container_name: traefik
     labels:
       - traefik.enable=true
@@ -46,7 +46,7 @@ services:
     depends_on:
       - authelia
   authelia:
-    image: authelia/authelia:4.38.12
+    image: authelia/authelia:4.38.15
     container_name: authelia
     labels:
       - traefik.enable=true
