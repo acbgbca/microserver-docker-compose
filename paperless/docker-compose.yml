@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   broker:
-    image: redis:7.4.0-alpine
+    image: redis:7.4.1-alpine
     restart: unless-stopped
     volumes:
       - ./redisdata:/data

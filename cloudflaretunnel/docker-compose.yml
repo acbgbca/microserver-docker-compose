@@ -18,7 +18,7 @@ services:
     restart: 'unless-stopped'
 
   traefikexternal:
-    image: traefik:v3.1.5
+    image: traefik:v3.1.6
     container_name: traefikexternal
     labels:
       - traefik.enable=true
@@ -61,7 +61,7 @@ services:
       - autheliaexternal
 
   autheliaexternal:
-    image: authelia/authelia:4.38.15
+    image: authelia/authelia:4.38.16
     container_name: autheliaexternal
     labels:
       - traefik.enable=true
@@ -91,7 +91,7 @@ services:
       retries: 3
       start_period: 15s
   redis:
-    image: redis:7.4.0-alpine
+    image: redis:7.4.1-alpine
     restart: unless-stopped
     command: redis-server --save 20 1 --loglevel warning --requirepass authelia
     volumes: 
