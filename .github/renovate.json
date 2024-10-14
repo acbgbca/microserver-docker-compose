@@ -17,6 +17,13 @@
     "commitBodyTable": true,
     "packageRules": [
         {
+            "description": "Ignore problematic promtail version",
+            "matchPackageNames": [
+                "grafana/promtail"
+            ],
+            "allowedVersions": "!/3.2.0/"
+        },
+        {
             "description": "Ignore old yyyy-MM-dd versions",
             "matchPackageNames": [
                 "ghcr.io/linuxserver/heimdall",
