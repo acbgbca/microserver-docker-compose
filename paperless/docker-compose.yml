@@ -1,20 +1,37 @@
-version: "2.4"
+
+# To upgrade the database:
+# * Create new pgdata directory
+# * Create database container using new postgres, and pointing to the new data directory
+# * Stop all of the containers
+#   docker compose stop --remove-orphans
+# * Start the 2 database containers (change container names to match)
+#   docker compose up db16 db17 -d
+# * Run pgdbcopy (change container names to match)
+#   docker run --rm --network ctr-network -it ghcr.io/dimitri/pgcopydb:latest pgcopydb clone --source postgresql://paperless:paperless@db16/paperless --target postgresql://paperless:paperless@db17/paperless --dir /tmp
+# * Stop containers
+#   docker compose stop --remove-orphans
+# * Update paperless to point to new container
+# * Comment out old container (verifies it isn't being used)
+# * Start all containers
+#   docker compose up -d
+# * Verify paperless is working.
+# * Delete old database
 services:
+  db16:
+    image: postgres:16.4
+    restart: unless-stopped
+    volumes:
+      - ./pgdata16:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+
   broker:
     image: redis:7.4.1-alpine
     restart: unless-stopped
     volumes:
       - ./redisdata:/data
-
-  db:
-    image: docker.io/library/postgres:13.16
-    restart: unless-stopped
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: paperless
-      POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
 
   paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx:2.12.1
@@ -26,7 +43,7 @@ services:
       - traefik.http.services.paperless.loadbalancer.server.port=8000
       - show.external=true
     depends_on:
-      - db
+      - db16
       - broker
       - gotenberg
       - tika
@@ -43,7 +60,7 @@ services:
     env_file: docker-compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
-      PAPERLESS_DBHOST: db
+      PAPERLESS_DBHOST: db16
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
