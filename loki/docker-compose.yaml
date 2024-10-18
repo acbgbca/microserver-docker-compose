@@ -18,7 +18,7 @@ services:
       start_period: 60s
     restart: unless-stopped
   promtail:
-    image:  grafana/promtail:3.2.1
+    image:  grafana/promtail:3.1.1
     container_name: promtail
     volumes:
       - ./promtail.yaml:/etc/promtail/docker-config.yaml
