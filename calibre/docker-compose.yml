@@ -15,6 +15,12 @@ services:
     volumes:
       - './config:/config'
       - '/mnt/calibre/books:/books'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
     restart: 'unless-stopped'
   calibreserver:
     image: 'ghcr.io/linuxserver/calibre:7.19.0@sha256:4f7c21af85f8fe8d436fbff48a02ddbf4370c137beedbbbf71825e5aa0a58bc7'
