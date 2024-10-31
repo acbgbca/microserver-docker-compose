@@ -18,7 +18,7 @@ services:
     restart: 'unless-stopped'
 
   traefikexternal:
-    image: traefik:v3.1.6
+    image: traefik:v3.2.0
     container_name: traefikexternal
     labels:
       - traefik.enable=true
@@ -61,7 +61,7 @@ services:
       - autheliaexternal
 
   autheliaexternal:
-    image: authelia/authelia:4.38.16
+    image: authelia/authelia:4.38.17
     container_name: autheliaexternal
     labels:
       - traefik.enable=true
