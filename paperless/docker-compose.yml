@@ -18,7 +18,7 @@ services:
       - ./redisdata:/data
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.13.4
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
