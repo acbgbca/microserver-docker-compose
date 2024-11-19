@@ -15,6 +15,7 @@
     ],
     "configMigration": true,
     "commitBodyTable": true,
+    "minimumReleaseAge": "3 days",
     "packageRules": [
         {
             "description": "Ignore problematic promtail version",
