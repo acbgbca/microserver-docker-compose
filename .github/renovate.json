@@ -22,7 +22,7 @@
             "matchPackageNames": [
                 "grafana/promtail"
             ],
-            "allowedVersions": "!/3.2.(0|1)/"
+            "allowedVersions": "!/3.(2|3).(0|1)/"
         },
         {
             "description": "Ignore old yyyy-MM-dd versions",
