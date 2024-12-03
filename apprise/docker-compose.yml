@@ -1,0 +1,19 @@
+services:
+  apprise:
+    image: caronc/apprise:1.1.6
+    container_name: apprise
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.apprise.loadbalancer.server.port=8000
+      - show.external=true
+    env_file:
+      - apprise.env
+    volumes:
+      - ./config:/config
+      - ./attach:/attach
+
+networks:
+  default:
+    external: true
+    name: ctr-network
