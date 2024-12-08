@@ -4,9 +4,8 @@ services:
   minecraft-alpha:
     image: ghcr.io/acbgbca/minecraft-bedrock:alpha
     container_name: minecraft-alpha
+    user: 9001:9001
     environment:
-      - UID=9001
-      - GID=9001
       - EULA=TRUE
     volumes:
       - ./config:/config
