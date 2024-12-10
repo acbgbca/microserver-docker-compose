@@ -1,0 +1,14 @@
+---
+services:
+  smtprelay:
+    image: grafana/smtprelay:2.1.5
+    container_name: smtprelay
+    hostname: smtprelay
+    command: -config=/smtprelay.ini
+    volumes:
+      - ./smtprelay.ini:/smtprelay.ini:ro
+    restart: 'unless-stopped'
+networks:
+  default:
+    external: true
+    name: ctr-network
