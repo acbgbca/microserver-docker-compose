@@ -10,7 +10,7 @@ services:
       - show.external=true
     environment:
       - SCRUTINY_WEB_INFLUXDB_HOST=scrutinydb
-      - SCRUTINY_NOTIFY_URLS=smtp://smtprelay:25/?from=${FROM}&to=${TO}
+      - SCRUTINY_NOTIFY_URLS=generic://n8n:5678/webhook/953f6356-9fcf-420e-a3c7-f46295051d18?disabletls=true&template=json
     user: "9001:9001"
     ports:
       - 3200:8080
