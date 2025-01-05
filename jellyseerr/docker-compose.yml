@@ -14,6 +14,7 @@ services:
       - TZ=Australia/Melbourne
     volumes:
       - ./config:/app/config
+      - /tmp/jellyseerr_cache:/app/.next/cache
     restart: unless-stopped
 networks:
   default:
