@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   sonarr:
-    image: 'ghcr.io/linuxserver/sonarr:4.0.11@sha256:ca4ad72f07e532d1d414435eb43193d1dc407255e46c21c2694653ca8af4fd81'
+    image: 'ghcr.io/linuxserver/sonarr:4.0.12@sha256:23f6911b2b81cb69aa03166b53c15081d5c3a5ed58f5b183c5900c2d8fc9759a'
     container_name: sonarr
     labels:
       - traefik.enable=true
