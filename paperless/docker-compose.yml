@@ -12,13 +12,13 @@ services:
       POSTGRES_PASSWORD: paperless
 
   broker:
-    image: redis:7.4.1-alpine
+    image: redis:7.4.2-alpine
     restart: unless-stopped
     volumes:
       - ./redisdata:/data
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.14.3
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001

@@ -1,6 +1,6 @@
 services:
   apprise:
-    image: caronc/apprise:1.1.7
+    image: caronc/apprise:1.1.8
     container_name: apprise
     restart: unless-stopped
     labels:

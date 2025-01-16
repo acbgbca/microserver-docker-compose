@@ -3,7 +3,7 @@ version: "2.4"
 
 services:
   traefik:
-    image: traefik:v3.2.3
+    image: traefik:v3.3.1
     container_name: traefik
     labels:
       - traefik.enable=true
@@ -75,7 +75,7 @@ services:
       retries: 3
       start_period: 15s
   redis:
-    image: redis:7.4.1-alpine
+    image: redis:7.4.2-alpine
     restart: unless-stopped
     command: redis-server --save 20 1 --loglevel warning --requirepass authelia
     volumes: 
