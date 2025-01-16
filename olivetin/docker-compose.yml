@@ -1,0 +1,16 @@
+services:
+  olivetin:
+    container_name: olivetin
+    image: ghcr.io/olivetin/olivetin:2024.12.11
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.olivetin.loadbalancer.server.port=1337
+      - show.external=true
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+    user: 9001:9001
+networks:
+  default:
+    external: true
+    name: ctr-network
