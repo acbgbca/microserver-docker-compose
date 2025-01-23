@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   radarr:
-    image: 'ghcr.io/linuxserver/radarr:5.17.2@sha256:dce7e81d08da67cf44437c7213d19faeef1323aa839712fbb53d1253ef94f93f'
+    image: 'ghcr.io/linuxserver/radarr:5.17.2@sha256:6edb323c959c4e664a46de4b6ff612cc05e190e42aba08b8d61831a371d46a93'
     container_name: radarr
     labels:
       - traefik.enable=true
