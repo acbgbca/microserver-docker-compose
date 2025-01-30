@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   transmission:
-    image: "ghcr.io/linuxserver/transmission:4.0.6@sha256:26692ddc7c32136a3ca0dae916b927f9f6feea8bb6ac74d3c225ee376336358b"
+    image: "ghcr.io/linuxserver/transmission:4.0.6@sha256:1159f11d63ac598da75f37b19326d792e0fec37d05630a7891891886b34a505a"
     container_name: transmission
     labels:
       - traefik.enable=true
